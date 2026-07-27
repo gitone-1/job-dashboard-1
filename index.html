@@ -603,6 +603,7 @@ async function loadResumeProfile() {
 async function loadJobsData() {
   const sources = [
     { url: './jobs.json', label: '本地数据' },
+    { url: 'https://gitone-1.github.io/job-dashboard-1/jobs.json', label: 'GitHub Pages(最新)' },
   ];
 
   for (const src of sources) {
