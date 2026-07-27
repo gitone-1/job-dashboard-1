@@ -1,204 +1,206 @@
 """
-大厂招聘 API 数据源 - 直接请求各公司公开 API
+大厂招聘数据源 — 使用 Playwright 搜索各大厂官网招聘页面
+替代已失效的内部 API
 """
 import json
+import random
+import re
+import time
 from typing import List, Dict, Any
-from utils.http_client import HTTPClient
-from utils.parser import clean_text, extract_salary_range, extract_tags, normalize_city, classify_company_type
 
 
-def scrape_apis(config: Dict, http_client: HTTPClient) -> List[Dict]:
+def scrape_apis(config: Dict, http_client=None) -> List[Dict]:
     """
-    抓取各大厂招聘 API
-    注意：部分 API 可能需要 cookie/认证，失败时返回空列表
+    抓取各大厂招聘官网
+    使用 Playwright 搜索各公司的招聘页面
     """
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("  ⚠️ Playwright 未安装，跳过大厂招聘")
+        return []
+
     all_jobs = []
-    cities = config.get('cities', [])
-    keywords = config.get('search_keywords', [])
-    api_endpoints = config.get('api_endpoints', {})
+    cities = config.get('cities', [])[:3]
+    keywords = config.get('search_keywords', [])[:3]
+    max_jobs = config.get('scraper', {}).get('max_jobs_per_source', 30)
 
-    # 阿里巴巴
-    ali_jobs = _scrape_alibaba(api_endpoints, http_client, cities, keywords, config)
-    if ali_jobs:
-        print(f"  阿里巴巴 API: {len(ali_jobs)} 条")
-    all_jobs.extend(ali_jobs)
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+        )
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            viewport={"width": 1440, "height": 900},
+            locale="zh-CN",
+        )
+        page = context.new_page()
 
-    # 字节跳动
-    bytedance_jobs = _scrape_bytedance(api_endpoints, http_client, cities, keywords, config)
-    if bytedance_jobs:
-        print(f"  字节跳动 API: {len(bytedance_jobs)} 条")
-    all_jobs.extend(bytedance_jobs)
+        # 定义大厂招聘搜索 URL
+        company_searches = [
+            # 腾讯
+            {
+                'company': '腾讯',
+                'url_tpl': 'https://careers.tencent.com/search.html?keyword={kw}&city={city}',
+            },
+            # 字节跳动
+            {
+                'company': '字节跳动',
+                'url_tpl': 'https://jobs.bytedance.com/experienced/position?keywords={kw}&location={city}',
+            },
+            # 阿里巴巴
+            {
+                'company': '阿里巴巴',
+                'url_tpl': 'https://talent.alibaba.com/off-campus/position-list?lang=zh&search={kw}',
+            },
+            # 美团
+            {
+                'company': '美团',
+                'url_tpl': 'https://zhaopin.meituan.com/web/personal?keyword={kw}',
+            },
+            # 京东
+            {
+                'company': '京东',
+                'url_tpl': 'https://zhaopin.jd.com/web/job/job_info_list/3?keyword={kw}',
+            },
+            # 网易
+            {
+                'company': '网易',
+                'url_tpl': 'https://hr.163.com/job-list.html?keyword={kw}',
+            },
+            # 华为
+            {
+                'company': '华为',
+                'url_tpl': 'https://career.huawei.com/reccampportal/portal5/social-recruitment.html?keywords={kw}',
+            },
+            # 比亚迪
+            {
+                'company': '比亚迪',
+                'url_tpl': 'https://job.byd.com/portal/social/search?keyword={kw}',
+            },
+        ]
 
-    # 腾讯
-    tencent_jobs = _scrape_tencent(api_endpoints, http_client, cities, keywords, config)
-    if tencent_jobs:
-        print(f"  腾讯 API: {len(tencent_jobs)} 条")
-    all_jobs.extend(tencent_jobs)
+        for cs in company_searches:
+            if len(all_jobs) >= max_jobs:
+                break
+            for kw in keywords[:2]:
+                if len(all_jobs) >= max_jobs:
+                    break
+                try:
+                    url = cs['url_tpl'].format(kw=kw, city=cities[0])
+                    print(f"  大厂搜索: {cs['company']} × {kw}")
+                    page.goto(url, wait_until="domcontentloaded", timeout=20000)
+                    time.sleep(4)
+
+                    # 等待页面渲染
+                    page.evaluate("window.scrollTo(0, document.body.scrollHeight * 0.5)")
+                    time.sleep(2)
+
+                    # 提取岗位信息
+                    cards = page.query_selector_all(
+                        '[class*="job-item"], [class*="position-item"], '
+                        '[class*="job-card"], [class*="job-list"] > div, '
+                        '[class*="list-item"], [class*="result-item"], '
+                        'tr[class*="job"], li[class*="item"]'
+                    )
+
+                    for card in cards[:15]:
+                        if len(all_jobs) >= max_jobs:
+                            break
+                        try:
+                            card_text = card.inner_text().strip()
+                            if len(card_text) < 10 or len(card_text) > 500:
+                                continue
+
+                            job = _parse_company_job(card_text, cs['company'], kw, config)
+                            if job:
+                                # 尝试获取链接
+                                link_el = card.query_selector('a')
+                                if link_el:
+                                    href = link_el.get_attribute('href') or ''
+                                    if href and not href.startswith('javascript'):
+                                        job['url'] = href if href.startswith('http') else f"{url.split('/web')[0]}{href}" if not href.startswith('/') else href
+                                all_jobs.append(job)
+                        except Exception:
+                            continue
+
+                    print(f"    找到 {len([j for j in all_jobs if j['company'] == cs['company']])} 条")
+                    time.sleep(random.uniform(3, 6))
+
+                except Exception as e:
+                    print(f"  大厂搜索异常 ({cs['company']}/{kw}): {e}")
+                    continue
+
+        browser.close()
 
     return all_jobs
 
 
-def _scrape_alibaba(endpoints: Dict, client: HTTPClient, cities: List[str],
-                    keywords: List[str], config: Dict) -> List[Dict]:
-    """阿里巴巴招聘 API"""
-    jobs = []
-    try:
-        # 阿里公开搜索API
-        url = endpoints.get('alibaba', 'https://talent.alibaba.com/api/search')
-        for city in cities[:3]:  # 只搜前3个城市，控制请求量
-            for kw in keywords[:2]:
-                params = {
-                    'city': city,
-                    'keyword': kw,
-                    'pageSize': 20,
-                    'pageIndex': 1,
-                }
-                resp = client.get(url, params=params)
-                if not resp:
-                    continue
+def _parse_company_job(text: str, company: str, keyword: str, config: Dict) -> Dict:
+    """解析大厂官网岗位卡片文本"""
+    from utils.parser import classify_company_type, extract_salary_range, normalize_city, extract_tags
 
-                try:
-                    data = resp.json()
-                    items = data.get('data', {}).get('list', [])
-                    if not items:
-                        items = data.get('content', [])
-                except Exception:
-                    continue
+    # 排除校招/实习
+    if any(w in text for w in ['实习', '校招', '应届', '培训生', '管培生', '2026', '2027']):
+        return None
 
-                for item in items:
-                    job = {
-                        'company': '阿里巴巴',
-                        'type': classify_company_type('阿里巴巴', config),
-                        'title': clean_text(item.get('name', item.get('title', ''))),
-                        'city': normalize_city(item.get('city', item.get('workCity', '')), cities),
-                        'salary': extract_salary_range(item.get('salary', '')),
-                        'url': item.get('url', item.get('detailUrl', '')),
-                        'source': '阿里巴巴招聘API',
-                        'source_type': 'api',
-                        'desc': clean_text(item.get('description', item.get('jobDesc', ''))),
-                        'requirements': _parse_requirements(item),
-                        'tags': [],
-                        'status': '可投递',
-                        'note': '',
-                    }
-                    if job['city'] and job['title']:
-                        job['tags'] = extract_tags(
-                            job['title'] + ' ' + job['desc'],
-                            config.get('search_keywords', [])
-                        )
-                        jobs.append(job)
-    except Exception as e:
-        print(f"  阿里巴巴 API 异常: {e}")
-    return jobs
+    # 排除管理岗
+    exclude_words = config.get('exclude_title_keywords', [])
+    if any(w in text for w in exclude_words):
+        return None
 
+    # 提取岗位标题
+    title = ''
+    title_patterns = [
+        r'(数据运营|产品运营|策略运营|用户运营|电商运营|增长运营|数字化运营|'
+        r'社区运营|平台运营|内容运营|客户运营|活动运营|运营专员|数据分析|'
+        r'数据产品|商业分析|业务运营|市场运营|品牌运营|商户运营|'
+        r'数据策略|增长策略|运营分析)',
+    ]
+    for pat in title_patterns:
+        m = re.search(pat, text)
+        if m:
+            title = m.group(1)
+            break
 
-def _scrape_bytedance(endpoints: Dict, client: HTTPClient, cities: List[str],
-                      keywords: List[str], config: Dict) -> List[Dict]:
-    """字节跳动招聘 API"""
-    jobs = []
-    try:
-        url = endpoints.get('bytedance', 'https://jobs.bytedance.com/api/search')
-        for city in cities[:3]:
-            for kw in keywords[:2]:
-                resp = client.post(url, json_data={
-                    'city': city,
-                    'keyword': kw,
-                    'limit': 20,
-                    'offset': 0,
-                })
-                if not resp:
-                    continue
-                try:
-                    data = resp.json()
-                    items = data.get('data', {}).get('jobPostList', [])
-                except Exception:
-                    continue
+    if not title:
+        # 检查是否包含关键词相关
+        kw_match = re.search(r'运营|数据|分析|增长|策略|产品', text)
+        if not kw_match:
+            return None
+        # 取第一行作为标题
+        lines = text.strip().split('\n')
+        title = lines[0][:30] if lines else keyword
 
-                for item in items:
-                    job = {
-                        'company': '字节跳动',
-                        'type': classify_company_type('字节跳动', config),
-                        'title': clean_text(item.get('title', item.get('name', ''))),
-                        'city': normalize_city(item.get('city', ''), cities),
-                        'salary': extract_salary_range(item.get('salary', '')),
-                        'url': item.get('url', item.get('detailUrl', '')),
-                        'source': '字节跳动招聘API',
-                        'source_type': 'api',
-                        'desc': clean_text(item.get('description', '')),
-                        'requirements': _parse_requirements(item),
-                        'tags': [],
-                        'status': '可投递',
-                        'note': '',
-                    }
-                    if job['city'] and job['title']:
-                        job['tags'] = extract_tags(
-                            job['title'] + ' ' + job['desc'],
-                            config.get('search_keywords', [])
-                        )
-                        jobs.append(job)
-    except Exception as e:
-        print(f"  字节跳动 API 异常: {e}")
-    return jobs
+    # 提取城市
+    cities = config.get('cities', [])
+    city = None
+    for c in cities:
+        if c in text:
+            city = c
+            break
 
+    # 提取薪资
+    salary_match = re.search(
+        r'(\d+[-~]\d+[kK])|(\d+[-~]\d+万)|(月薪\s*\d+[-~]\d+[kK])|(\d+K[-~]\d+K)',
+        text
+    )
+    salary = salary_match.group(0) if salary_match else '面议'
 
-def _scrape_tencent(endpoints: Dict, client: HTTPClient, cities: List[str],
-                    keywords: List[str], config: Dict) -> List[Dict]:
-    """腾讯招聘 API"""
-    jobs = []
-    try:
-        url = endpoints.get('tencent', 'https://careers.tencent.com/api/search')
-        for city in cities[:3]:
-            for kw in keywords[:2]:
-                resp = client.post(url, json_data={
-                    'city': city,
-                    'keyword': kw,
-                    'pageSize': 20,
-                    'pageIndex': 1,
-                })
-                if not resp:
-                    continue
-                try:
-                    data = resp.json()
-                    items = data.get('Data', {}).get('Posts', [])
-                except Exception:
-                    continue
-
-                for item in items:
-                    job = {
-                        'company': '腾讯',
-                        'type': classify_company_type('腾讯', config),
-                        'title': clean_text(item.get('RecruitPostName', item.get('title', ''))),
-                        'city': normalize_city(item.get('LocationName', item.get('city', '')), cities),
-                        'salary': extract_salary_range(item.get('Salary', '')),
-                        'url': item.get('PostURL', item.get('url', '')),
-                        'source': '腾讯招聘API',
-                        'source_type': 'api',
-                        'desc': clean_text(item.get('Responsibility', item.get('description', ''))),
-                        'requirements': _parse_requirements(item),
-                        'tags': [],
-                        'status': '可投递',
-                        'note': '',
-                    }
-                    if job['city'] and job['title']:
-                        job['tags'] = extract_tags(
-                            job['title'] + ' ' + job['desc'],
-                            config.get('search_keywords', [])
-                        )
-                        jobs.append(job)
-    except Exception as e:
-        print(f"  腾讯 API 异常: {e}")
-    return jobs
-
-
-def _parse_requirements(item: Dict) -> List[str]:
-    """解析任职要求"""
-    reqs = []
-    req_text = item.get('requirement', item.get('qualification', item.get('requirements', '')))
-    if isinstance(req_text, str):
-        # 按句号或换行拆分
-        import re
-        parts = re.split(r'[。；\n;]', req_text)
-        reqs = [r.strip() for r in parts if len(r.strip()) > 5]
-    elif isinstance(req_text, list):
-        reqs = req_text
-    return reqs[:6]  # 最多6条
+    return {
+        'company': company,
+        'type': classify_company_type(company, config),
+        'title': title,
+        'city': city or '苏州',
+        'salary': extract_salary_range(salary),
+        'url': '',
+        'source': f'{company}招聘官网',
+        'source_type': 'api',
+        'desc': text[:300],
+        'requirements': [],
+        'tags': extract_tags(text, config.get('search_keywords', [])),
+        'status': '可投递',
+        'note': f'{company}社招',
+        'recruit_type': '社招',
+    }

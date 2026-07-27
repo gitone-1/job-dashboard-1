@@ -1,867 +1,835 @@
 [
   {
-    "company": "卡特彼勒",
-    "type": "foreign",
-    "title": "用户运营",
-    "city": "杭州",
-    "salary": "面议",
+    "company": "华祥科技",
+    "type": "internet",
+    "title": "产品用户运营",
+    "city": "苏州",
+    "salary": "10-11K",
     "deadline": "",
-    "source": "微信公众号(卡特彼勒招聘)",
-    "url": "",
-    "source_type": "wechat",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1982289223.shtml",
+    "source_type": "liepin",
     "tags": [
+      "产品运营",
       "用户运营"
     ],
-    "desc": "卡特彼勒杭州用户运营岗位",
-    "requirements": [],
+    "desc": "华祥科技苏州工业园区招聘产品用户运营，负责产品运营数据分析、用户反馈收集、产品优化迭代",
+    "requirements": [
+      "3-5年产品运营经验",
+      "本科及以上学历"
+    ],
     "status": "可投递",
-    "note": "真实抓取·社招",
-    "match": 73,
+    "note": "猎聘社招·华祥科技(1000-2000人)",
     "recruit_type": "社招",
+    "id": 1,
+    "match": 100,
     "_meta": {
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
       "last_updated": "2026-07-27"
-    },
-    "id": 1
+    }
   },
   {
-    "id": 2,
-    "company": "同程集团",
+    "company": "贝壳找房",
     "type": "internet",
-    "title": "策略运营",
+    "title": "数据运营",
     "city": "苏州",
-    "salary": "25-38K·15薪",
-    "deadline": "2026-08-15",
-    "source": "同程招聘(公众号)",
-    "url": "https://app.mokahr.com/social-recruitment/ly/44706#/search?keyword=策略运营",
+    "salary": "15-30K·15薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1971529975.shtml",
+    "source_type": "liepin",
     "tags": [
-      "策略运营",
+      "数据运营",
       "数据分析",
-      "用户运营",
-      "OTA"
+      "运营数据分析"
     ],
-    "desc": "负责同程旅行核心业务线的策略运营，通过数据复盘优化定价策略和活动营销方案，监控核心指标变化。",
+    "desc": "贝壳找房苏州站招聘数据运营专家，负责业务数据分析、指标体系搭建、数据驱动运营决策",
     "requirements": [
-      "3年以上策略/数据运营经验",
-      "精通SQL和Excel",
-      "有OTA或电商经验优先"
+      "3年以上数据分析经验",
+      "本科及以上学历",
+      "SQL/Python技能"
     ],
     "status": "可投递",
-    "note": "同行经历加分！",
+    "note": "猎聘社招·贝壳找房",
+    "recruit_type": "社招",
+    "id": 2,
     "match": 97,
-    "source_type": "manual",
     "_meta": {
-      "fingerprint": "06b105604b156ac4",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "同程招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.ly.com"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
-    "id": 3,
-    "company": "蚂蚁集团",
-    "type": "internet",
-    "title": "策略运营",
-    "city": "杭州",
-    "salary": "30-48K·16薪",
-    "deadline": "2026-08-18",
-    "source": "蚂蚁集团招聘(公众号)",
-    "url": "https://talent.antgroup.com/off-campus-position?search=策略运营",
-    "tags": [
-      "策略运营",
-      "数据分析",
-      "金融",
-      "用户增长"
-    ],
-    "desc": "负责支付宝业务线的策略运营，通过数据分析和策略制定优化用户转化和留存。",
-    "requirements": [
-      "3-5年策略/数据运营经验",
-      "精通数据分析",
-      "有金融/支付行业经验优先"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 90,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "1906eac542152701",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "蚂蚁集团招聘(公众号)"
-      ],
-      "raw_source_url": "https://talent.antgroup.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 4,
-    "company": "亚马逊中国",
+    "company": "新大洲本田",
     "type": "foreign",
     "title": "数据运营",
-    "city": "上海",
-    "salary": "32-50K",
-    "deadline": "2026-08-10",
-    "source": "亚马逊招聘(公众号)",
-    "url": "https://www.amazon.jobs/zh/search?base_query=数据运营",
+    "city": "苏州",
+    "salary": "面议",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1983549937.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营"
+    ],
+    "desc": "新大洲本田摩托(苏州)有限公司招聘数据运营，太仓，负责生产数据运营管理、供应链数据分析",
+    "requirements": [
+      "3-5年数据运营经验",
+      "本科及以上学历"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·中日合资",
+    "recruit_type": "社招",
+    "id": 3,
+    "match": 96,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "聚合数据",
+    "type": "internet",
+    "title": "医疗数据运营",
+    "city": "苏州",
+    "salary": "15-25K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1983069763.shtml",
+    "source_type": "liepin",
     "tags": [
       "数据运营",
-      "SQL",
-      "Tableau",
-      "跨境电商",
-      "BI"
+      "数据分析"
     ],
-    "desc": "负责亚马逊中国卖家平台的数据运营，构建数据指标体系和可视化看板，驱动业务决策。",
+    "desc": "聚合数据苏州工业园区招聘医疗数据运营（业务BD方向），负责医疗行业数据运营、客户需求对接、数据解决方案",
     "requirements": [
-      "3-5年数据分析/运营经验",
-      "精通SQL和至少一种BI工具",
-      "英语流利"
+      "5年以上数据运营经验",
+      "本科及以上学历",
+      "医疗/大数据行业背景"
     ],
     "status": "可投递",
-    "note": "即将截止",
-    "match": 84,
-    "source_type": "manual",
+    "note": "猎聘社招·聚合数据(已上市)",
+    "recruit_type": "社招",
+    "id": 4,
+    "match": 96,
     "_meta": {
-      "fingerprint": "9d9674d4462cf490",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "亚马逊招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.amazon.jobs"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
-    "id": 5,
-    "company": "博世中国",
-    "type": "foreign",
-    "title": "数字化运营专员",
-    "city": "苏州",
-    "salary": "22-35K·14薪",
-    "deadline": "2026-08-25",
-    "source": "博世中国人才苑(公众号)/BOSS直聘",
-    "url": "https://www.zhipin.com/gongsi/job/c101190400/a49812b0e486f2df0nB82N-8.html",
+    "company": "淘天集团",
+    "type": "internet",
+    "title": "数据运营",
+    "city": "杭州",
+    "salary": "25-35K",
+    "deadline": "",
+    "source": "牛客网",
+    "url": "https://www.nowcoder.com/jobs/detail/345668",
+    "source_type": "api",
     "tags": [
-      "数字化运营",
+      "数据运营",
       "数据分析",
-      "SAP",
-      "工业4.0"
+      "电商运营"
     ],
-    "desc": "负责博世苏州工厂数字化平台的数据运营，构建数据看板和分析报表，支撑运营决策。",
+    "desc": "淘天集团社招数据运营，杭州，负责电商平台数据运营、业务分析、数据驱动增长策略",
     "requirements": [
-      "3年以上数据/运营经验",
-      "熟练使用Excel和BI工具",
-      "有制造业背景优先"
+      "3年以上数据运营经验",
+      "本科及以上学历",
+      "SQL/Python技能"
     ],
     "status": "可投递",
-    "note": "社招·苏州·BOSS直聘投递",
-    "match": 83,
-    "source_type": "manual",
+    "note": "阿里巴巴旗下·社招",
+    "recruit_type": "社招",
+    "id": 5,
+    "match": 93,
     "_meta": {
-      "fingerprint": "078eef4cb449179b",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "博世招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.bosch.com.cn"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
+    "company": "中软国际",
+    "type": "other",
+    "title": "数据运营",
+    "city": "苏州",
+    "salary": "9-12K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1977230547.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "数据分析"
+    ],
+    "desc": "中软国际科技苏州工业园区招聘数据运营，负责业务数据整理分析、运营报表制作、数据质量监控",
+    "requirements": [
+      "1-3年数据运营经验",
+      "本科及以上学历",
+      "Excel熟练"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·中软国际(万人以上)",
+    "recruit_type": "社招",
     "id": 6,
+    "match": 93,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "上海寰通商务科技",
+    "type": "other",
+    "title": "数据运营支持",
+    "city": "苏州",
+    "salary": "8-10K·13薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1977389157.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营"
+    ],
+    "desc": "上海寰通商务科技苏州工业园区招聘数据运营支持，负责业务数据整理、运营报表制作、系统数据维护",
+    "requirements": [
+      "3-5年工作经验",
+      "本科及以上学历"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招",
+    "recruit_type": "社招",
+    "id": 7,
+    "match": 92,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "SK海力士",
+    "type": "foreign",
+    "title": "数据运营分析",
+    "city": "无锡",
+    "salary": "15-25K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/city-wuxi/",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "数据分析",
+      "运营数据分析"
+    ],
+    "desc": "SK海力士无锡招聘数据运营分析岗位，负责半导体生产数据运营分析、良率数据监控、运营报表",
+    "requirements": [
+      "本科及以上学历",
+      "数据分析能力",
+      "SQL/Python",
+      "半导体行业经验优先"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·韩资外企",
+    "recruit_type": "社招",
+    "id": 8,
+    "match": 91,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "简智新创机器人",
+    "type": "other",
+    "title": "数据运营",
+    "city": "苏州",
+    "salary": "10-20K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1982720937.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "数据分析"
+    ],
+    "desc": "简智新创(北京)机器人科技苏州招聘数据运营，负责机器人业务数据运营、AI训练数据管理",
+    "requirements": [
+      "2年以上数据运营经验",
+      "本科及以上学历"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·AI/机器人赛道",
+    "recruit_type": "社招",
+    "id": 9,
+    "match": 91,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "涟煜新能源",
+    "type": "other",
+    "title": "数据运营",
+    "city": "苏州",
+    "salary": "20-22K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1984023411.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营"
+    ],
+    "desc": "涟煜(苏州)新能源科技招聘数据运营，负责新能源业务数据运营管理、行业数据分析",
+    "requirements": [
+      "8年以上工作经验",
+      "本科及以上学历"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·新能源赛道",
+    "recruit_type": "社招",
+    "id": 10,
+    "match": 91,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "牧直科技",
+    "type": "other",
+    "title": "数据运营",
+    "city": "杭州",
+    "salary": "面议",
+    "deadline": "",
+    "source": "BOSS直聘",
+    "url": "https://www.zhipin.com/job_detail/276bbf67cb04eefb0nR-0tW1E1FT.html",
+    "source_type": "boss",
+    "tags": [
+      "数据运营",
+      "数据分析"
+    ],
+    "desc": "杭州牧直招聘数据运营，负责营销数据日常运营管理、AI语音外呼链路优化、数据分析",
+    "requirements": [
+      "统计/数学相关专业",
+      "数据分析能力"
+    ],
+    "status": "可投递",
+    "note": "BOSS直聘·社招",
+    "recruit_type": "社招",
+    "id": 11,
+    "match": 91,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "拼多多",
+    "type": "internet",
+    "title": "数据运营",
+    "city": "上海",
+    "salary": "20-40K·16薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/city-sh/zpshujuyunying/",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "电商运营",
+      "数据分析"
+    ],
+    "desc": "拼多多上海招聘数据运营，负责电商平台业务数据分析、运营策略制定、数据驱动增长",
+    "requirements": [
+      "2年以上数据运营经验",
+      "本科及以上学历",
+      "SQL/Python"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·拼多多",
+    "recruit_type": "社招",
+    "id": 12,
+    "match": 91,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "比亚迪",
+    "type": "internet",
+    "title": "数据运营",
+    "city": "常州",
+    "salary": "10-18K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://job.byd.com/",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "数据分析"
+    ],
+    "desc": "比亚迪常州招聘数据运营，负责生产数据运营管理、业务数据分析、运营效率提升",
+    "requirements": [
+      "2年以上数据运营经验",
+      "本科及以上学历"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·比亚迪",
+    "recruit_type": "社招",
+    "id": 13,
+    "match": 91,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "同程旅行",
+    "type": "internet",
+    "title": "用户运营",
+    "city": "苏州",
+    "salary": "25-35K·14薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1977164497.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "用户运营",
+      "策略运营",
+      "数据分析"
+    ],
+    "desc": "同程旅行苏州工业园区招聘用户运营，负责OTA平台用户运营策略制定、用户分层运营、增长项目推进",
+    "requirements": [
+      "5年以上用户运营经验",
+      "本科及以上学历",
+      "OTA/互联网背景优先"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·同程旅行(已上市)",
+    "recruit_type": "社招",
+    "id": 14,
+    "match": 90,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "上海寰通商务科技",
+    "type": "other",
+    "title": "数据运营专员",
+    "city": "苏州",
+    "salary": "5-7K·13薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1972402333.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营"
+    ],
+    "desc": "上海寰通商务科技苏州工业园区招聘数据运营专员，负责日常数据运营、报表整理、数据录入维护",
+    "requirements": [
+      "1-3年工作经验",
+      "本科及以上学历"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·适合初级",
+    "recruit_type": "社招",
+    "id": 15,
+    "match": 89,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "三六五网",
+    "type": "internet",
+    "title": "用户运营（B端方向）",
+    "city": "苏州",
+    "salary": "10-15K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1980476295.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "用户运营",
+      "平台运营"
+    ],
+    "desc": "三六五网苏州工业园区招聘B端用户运营，负责平台B端用户增长、客户维护、运营数据分析",
+    "requirements": [
+      "3-5年用户运营经验",
+      "本科及以上学历",
+      "B端运营经验优先"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·三六五网(已上市)",
+    "recruit_type": "社招",
+    "id": 16,
+    "match": 86,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "携程",
+    "type": "internet",
+    "title": "产品运营",
+    "city": "上海",
+    "salary": "18-30K·15薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/city-sh/zpshujuyunying/",
+    "source_type": "liepin",
+    "tags": [
+      "产品运营",
+      "用户运营",
+      "数据分析"
+    ],
+    "desc": "携程上海招聘产品运营，负责OTA平台产品运营、用户增长、数据分析与优化",
+    "requirements": [
+      "3年以上产品运营经验",
+      "本科及以上学历",
+      "旅游/OTA背景优先"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·携程(已上市)",
+    "recruit_type": "社招",
+    "id": 17,
+    "match": 84,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
     "company": "海康威视",
     "type": "state",
-    "title": "数据运营工程师",
+    "title": "数据运营专员",
     "city": "杭州",
-    "salary": "20-32K·14薪",
-    "deadline": "2026-08-30",
-    "source": "海康威视招聘(公众号)",
-    "url": "https://talent.hikvision.com/social/search?key=数据运营工程师",
+    "salary": "面议",
+    "deadline": "",
+    "source": "BOSS直聘",
+    "url": "https://www.zhipin.com/job_detail/5cdc2a393a8081511XZ509q7EVRU.html",
+    "source_type": "boss",
     "tags": [
       "数据运营",
-      "SQL",
-      "报表",
-      "物联网"
+      "数据分析",
+      "平台运营"
     ],
-    "desc": "负责海康威视物联网平台的数据运营，构建数据分析体系，为业务决策提供数据支撑。",
+    "desc": "海康威视杭州招聘数据运营专员（海外数据平台），负责海外数据平台运营、数据看板建设、指标体系搭建",
     "requirements": [
-      "3年以上数据运营经验",
-      "精通SQL",
-      "有IoT/安防行业背景优先"
+      "本科及以上学历",
+      "数据分析能力",
+      "英语良好"
     ],
     "status": "可投递",
-    "note": "",
-    "match": 83,
-    "source_type": "manual",
+    "note": "央企控股·社招",
+    "recruit_type": "社招",
+    "id": 18,
+    "match": 82,
     "_meta": {
-      "fingerprint": "e44aed45c9d0ed4b",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "海康威视招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.hikvision.com"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
-    "id": 7,
-    "company": "中国电信",
+    "company": "叮咚买菜",
+    "type": "internet",
+    "title": "资深用户运营",
+    "city": "苏州",
+    "salary": "15-20K·15薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1980096689.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "用户运营",
+      "增长运营",
+      "数据分析"
+    ],
+    "desc": "叮咚买菜苏州招聘资深用户运营，负责用户增长策略、用户生命周期管理、数据驱动运营决策",
+    "requirements": [
+      "3-5年用户运营经验",
+      "本科及以上学历",
+      "新零售/电商背景"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·叮咚买菜(已上市)",
+    "recruit_type": "社招",
+    "id": 19,
+    "match": 77,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "杭州市数据集团",
     "type": "state",
-    "title": "数据运营工程师",
-    "city": "上海",
-    "salary": "20-32K",
-    "deadline": "2026-09-05",
-    "source": "中国电信招聘(公众号)",
-    "url": "https://www.chinatelecom.com.cn/zp/",
+    "title": "数据产品运营",
+    "city": "杭州",
+    "salary": "面议",
+    "deadline": "",
+    "source": "高校人才网",
+    "url": "https://www.gaoxiaojob.com/job/detail/1810488.html",
+    "source_type": "guopin",
     "tags": [
       "数据运营",
-      "SQL",
-      "通信",
-      "报表"
+      "产品运营"
     ],
-    "desc": "负责电信业务数据运营，构建数据分析体系，为业务决策提供数据支撑。",
+    "desc": "杭州市数据集团有限公司下属企业招聘数据产品运营人员，负责数据产品运营推广、政务数据应用",
     "requirements": [
-      "3年以上数据运营经验",
-      "精通SQL",
-      "有通信行业背景优先"
+      "本科及以上学历",
+      "数据产品运营经验",
+      "政务/大数据背景优先"
     ],
     "status": "可投递",
-    "note": "",
-    "match": 83,
-    "source_type": "manual",
+    "note": "国企·社招",
+    "recruit_type": "社招",
+    "id": 20,
+    "match": 71,
     "_meta": {
-      "fingerprint": "2b16c265935f97a6",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "中国电信招聘(公众号)"
-      ],
-      "raw_source_url": "https://zhaopin.telecomjs.com"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
-    "id": 8,
+    "company": "爱回收",
+    "type": "internet",
+    "title": "数据运营",
+    "city": "苏州",
+    "salary": "10-12K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1979887411.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "产品运营"
+    ],
+    "desc": "爱回收苏州工业园区招聘数据运营（产品开发方向），负责产品数据运营分析、用户行为数据挖掘",
+    "requirements": [
+      "经验不限",
+      "本科及以上学历"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·爱回收(已上市)",
+    "recruit_type": "社招",
+    "id": 21,
+    "match": 71,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "哔哩哔哩",
+    "type": "internet",
+    "title": "用户运营",
+    "city": "上海",
+    "salary": "15-25K·15薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/city-sh/zpshujuyunying/",
+    "source_type": "liepin",
+    "tags": [
+      "用户运营",
+      "社区运营",
+      "内容运营"
+    ],
+    "desc": "哔哩哔哩上海招聘用户运营，负责社区用户运营、用户增长策略、用户数据分析",
+    "requirements": [
+      "2年以上用户运营经验",
+      "本科及以上学历",
+      "社区/内容平台背景"
+    ],
+    "status": "可投递",
+    "note": "猎聘社招·B站(已上市)",
+    "recruit_type": "社招",
+    "id": 22,
+    "match": 68,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
+    "company": "数字浙江技术运营",
+    "type": "state",
+    "title": "数据运营",
+    "city": "杭州",
+    "salary": "面议",
+    "deadline": "",
+    "source": "牛客网",
+    "url": "https://campus.niuqizp.com/schedule-7k8U5NZaN.html",
+    "source_type": "guopin",
+    "tags": [
+      "数据运营",
+      "数字化运营"
+    ],
+    "desc": "数字浙江技术运营有限公司社招数据运营，负责省级数字政府建设平台的数据治理与运营",
+    "requirements": [
+      "本科及以上学历",
+      "数据运营经验",
+      "政务数字化背景优先"
+    ],
+    "status": "可投递",
+    "note": "国企·社招",
+    "recruit_type": "社招",
+    "id": 23,
+    "match": 67,
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    }
+  },
+  {
     "company": "敏实集团",
     "type": "foreign",
     "title": "数字化运营",
     "city": "嘉兴",
-    "salary": "18-28K·13薪",
-    "deadline": "2026-09-10",
-    "source": "敏实招聘(公众号)",
-    "url": "https://minthgroup.zhiye.com/social?search=数字化运营",
+    "salary": "12-20K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/city-jiaxing/",
+    "source_type": "liepin",
     "tags": [
       "数字化运营",
-      "数据分析",
-      "汽车零部件",
-      "制造"
+      "数据分析"
     ],
-    "desc": "负责敏实集团数字化转型中的数据运营工作，包括数据采集、分析和运营报表输出。",
+    "desc": "敏实集团嘉兴招聘数字化运营岗位，负责制造数字化运营、数据平台建设、运营数据分析",
     "requirements": [
-      "2-3年数据分析/运营经验",
-      "熟练使用Excel和BI工具",
-      "有制造业背景优先"
+      "本科及以上学历",
+      "数字化运营经验",
+      "制造业背景优先"
     ],
     "status": "可投递",
-    "note": "外企制造业",
-    "match": 83,
-    "source_type": "manual",
+    "note": "猎聘社招·外企",
+    "recruit_type": "社招",
+    "id": 24,
+    "match": 57,
     "_meta": {
-      "fingerprint": "1e24a370cefc76c0",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "敏实招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.minthgroup.com"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
-    "id": 9,
-    "company": "药明康德",
-    "type": "foreign",
-    "title": "数据运营",
-    "city": "无锡",
-    "salary": "22-35K·14薪",
-    "deadline": "2026-08-20",
-    "source": "药明康德招聘(公众号)",
-    "url": "https://wuxiapptec.zhiye.com/social?search=数据运营",
-    "tags": [
-      "数据运营",
-      "数据分析",
-      "医药",
-      "大健康"
-    ],
-    "desc": "负责药明康德研发数据平台的运营，通过数据分析优化研发流程和资源配置。",
-    "requirements": [
-      "3年以上数据运营经验",
-      "有医药/大健康行业背景优先",
-      "精通SQL"
-    ],
-    "status": "可投递",
-    "note": "大健康行业匹配",
-    "match": 83,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "02185db9e8b8eed0",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "药明康德招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.wuxiapptec.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 10,
-    "company": "微软中国",
-    "type": "foreign",
-    "title": "产品运营",
+    "company": "京东",
+    "type": "internet",
+    "title": "用户运营（京东mall超体）",
     "city": "苏州",
-    "salary": "28-45K·15薪",
-    "deadline": "2026-08-20",
-    "source": "微软招聘(公众号)",
-    "url": "https://careers.microsoft.com/v2/global/en/search.html?q=产品运营",
+    "salary": "9-14K·16薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1983664215.shtml",
+    "source_type": "liepin",
     "tags": [
-      "产品运营",
-      "数据分析",
-      "SQL",
-      "PowerBI",
-      "B端"
+      "用户运营",
+      "电商运营"
     ],
-    "desc": "负责Microsoft 365产品在亚太区的运营数据分析与策略优化，通过数据驱动用户增长与留存。",
+    "desc": "京东mall超体副店长（用户运营方向），苏州工业园区，负责门店用户运营、会员体系搭建、活动策划执行",
     "requirements": [
-      "3-5年产品运营经验",
-      "精通SQL和数据分析工具",
-      "英语读写流利"
+      "2年以上用户运营经验",
+      "本科及以上学历",
+      "零售行业背景优先"
     ],
     "status": "可投递",
-    "note": "苏州园区",
-    "match": 80,
-    "source_type": "manual",
+    "note": "猎聘社招·京东",
+    "recruit_type": "社招",
+    "id": 25,
+    "match": 53,
     "_meta": {
-      "fingerprint": "385bc3b3720b9535",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "微软招聘(公众号)"
-      ],
-      "raw_source_url": "https://careers.microsoft.com"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
-    "id": 11,
-    "company": "华为",
-    "type": "internet",
-    "title": "产品数据运营",
+    "company": "雅迪科技",
+    "type": "other",
+    "title": "区域用户运营",
     "city": "苏州",
-    "salary": "28-45K·14薪",
-    "deadline": "2026-08-18",
-    "source": "华为招聘(公众号)",
-    "url": "https://career.huawei.com/reccampportal/portal5/social-recruitment.html?keywords=产品数据运营",
-    "tags": [
-      "数据运营",
-      "产品运营",
-      "指标体系",
-      "通信"
-    ],
-    "desc": "负责华为云/终端业务的数据运营，搭建数据指标体系，为产品决策提供数据支撑。",
-    "requirements": [
-      "3-5年数据运营经验",
-      "精通SQL",
-      "有B端产品经验优先"
-    ],
-    "status": "可投递",
-    "note": "苏州研究所",
-    "match": 80,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "ccd7f62525ef9369",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "华为招聘(公众号)"
-      ],
-      "raw_source_url": "https://career.huawei.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 12,
-    "company": "网易",
-    "type": "internet",
-    "title": "产品运营",
-    "city": "杭州",
-    "salary": "25-38K·16薪",
-    "deadline": "2026-08-22",
-    "source": "网易招聘(公众号)",
-    "url": "https://hr.163.com/job-list.html?search=产品运营",
-    "tags": [
-      "产品运营",
-      "用户运营",
-      "数据分析",
-      "内容"
-    ],
-    "desc": "负责网易云音乐/有道等产品线的运营策略，通过数据分析驱动产品功能优化和用户增长。",
-    "requirements": [
-      "3年以上产品运营经验",
-      "精通数据分析",
-      "对内容产品有热情"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 77,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "33356a0e882c1d9f",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "网易招聘(公众号)"
-      ],
-      "raw_source_url": "https://hr.163.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 13,
-    "company": "吉利汽车",
-    "type": "internet",
-    "title": "用户运营",
-    "city": "杭州",
-    "salary": "22-35K·14薪",
-    "deadline": "2026-08-15",
-    "source": "吉利招聘(公众号)",
-    "url": "https://job.geely.com/social-recruitment/geely/96123",
+    "salary": "12-20K·14薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1983307259.shtml",
+    "source_type": "liepin",
     "tags": [
       "用户运营",
-      "数据分析",
-      "汽车",
-      "CRM"
+      "区域运营"
     ],
-    "desc": "负责吉利汽车APP用户运营，通过数据分析优化用户生命周期管理和活跃度提升。",
+    "desc": "雅迪科技苏州招聘区域用户运营岗，负责区域市场用户运营策略、门店用户管理、活动策划执行",
     "requirements": [
-      "3年以上用户运营经验",
-      "精通数据分析",
-      "有汽车行业背景优先"
+      "经验不限",
+      "学历不限",
+      "零售运营经验优先"
     ],
     "status": "可投递",
-    "note": "",
-    "match": 73,
-    "source_type": "manual",
+    "note": "猎聘社招·雅迪科技(已上市)",
+    "recruit_type": "社招",
+    "id": 26,
+    "match": 53,
     "_meta": {
-      "fingerprint": "8c0a6e72d5596c82",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "吉利招聘(公众号)"
-      ],
-      "raw_source_url": "https://job.geely.com"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   },
   {
-    "id": 14,
-    "company": "阿里巴巴",
-    "type": "internet",
-    "title": "数据运营",
-    "city": "杭州",
-    "salary": "30-48K·16薪",
-    "deadline": "2026-08-15",
-    "source": "阿里巴巴招聘(公众号)",
-    "url": "https://talent.alibaba.com/off-campus/position-list?search=数据运营",
-    "tags": [
-      "数据运营",
-      "指标体系",
-      "SQL",
-      "电商",
-      "用户分析"
-    ],
-    "desc": "负责淘宝/天猫业务线的数据运营，搭建数据指标体系，通过数据洞察驱动业务决策与增长。",
-    "requirements": [
-      "3-5年数据运营经验",
-      "精通SQL和BI工具",
-      "有电商平台经验优先"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 72,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "dd30f89116017916",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "阿里巴巴招聘(公众号)"
-      ],
-      "raw_source_url": "https://talent.alibaba.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 15,
-    "company": "SK海力士",
-    "type": "foreign",
-    "title": "运营数据分析",
-    "city": "无锡",
-    "salary": "20-30K·15薪",
-    "deadline": "2026-08-30",
-    "source": "SK海力士招聘(公众号)",
-    "url": "https://www.skhynix.com.cn/recruitWork.jsp",
-    "tags": [
-      "数据分析",
-      "运营",
-      "半导体",
-      "制造业"
-    ],
-    "desc": "负责半导体生产运营数据的分析，通过数据驱动生产效率提升和成本优化。",
-    "requirements": [
-      "3年以上数据分析经验",
-      "熟练使用SQL和Excel",
-      "有制造业背景优先"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 69,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "33bbb1c8135b3843",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "SK海力士招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.skhynix.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 16,
-    "company": "联合利华",
-    "type": "foreign",
-    "title": "用户增长运营",
-    "city": "上海",
-    "salary": "25-38K·14薪",
-    "deadline": "2026-08-25",
-    "source": "联合利华微招聘(公众号)",
-    "url": "https://careers.unilever.com/search-jobs?location=China",
-    "tags": [
-      "用户增长",
-      "私域运营",
-      "数据分析",
-      "快消"
-    ],
-    "desc": "负责联合利华中国区私域用户增长，通过数据分析制定增长策略，提升用户LTV。",
-    "requirements": [
-      "3年以上用户运营/增长经验",
-      "熟悉私域运营体系",
-      "较强的数据分析能力"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 67,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "51902794d0f355bc",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "联合利华微招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.unilever.com.cn"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 17,
-    "company": "拼多多",
-    "type": "internet",
-    "title": "用户运营",
-    "city": "上海",
-    "salary": "28-42K·16薪",
-    "deadline": "2026-08-28",
-    "source": "拼多多招聘(公众号)",
-    "url": "https://careers.pinduoduo.com/jobs?keyword=用户运营",
+    "company": "苏州云巴巴数字科技",
+    "type": "other",
+    "title": "B端用户运营",
+    "city": "苏州",
+    "salary": "7-12K",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1982888267.shtml",
+    "source_type": "liepin",
     "tags": [
       "用户运营",
-      "增长",
-      "数据分析",
-      "电商"
+      "平台运营"
     ],
-    "desc": "负责拼多多用户增长和留存，通过数据分析制定精细化运营策略，提升用户活跃度。",
+    "desc": "苏州云巴巴数字科技招聘生态运营服务专员/B端用户运营，负责B端客户运营维护、生态合作伙伴对接",
     "requirements": [
-      "3年以上用户运营经验",
-      "精通数据分析",
-      "有电商平台经验"
+      "经验不限",
+      "本科及以上学历"
     ],
     "status": "可投递",
-    "note": "",
-    "match": 63,
-    "source_type": "manual",
+    "note": "猎聘社招·数字化服务",
+    "recruit_type": "社招",
+    "id": 27,
+    "match": 53,
     "_meta": {
-      "fingerprint": "fcd52761fa9ed9c7",
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "拼多多招聘(公众号)"
-      ],
-      "raw_source_url": "https://careers.pinduoduo.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 18,
-    "company": "浙江中控",
-    "type": "state",
-    "title": "产品运营",
-    "city": "杭州",
-    "salary": "18-28K·14薪",
-    "deadline": "2026-08-20",
-    "source": "中控技术招聘(公众号)",
-    "url": "https://supcon.zhiye.com/social?search=产品运营",
-    "tags": [
-      "产品运营",
-      "工业互联网",
-      "数据分析",
-      "B端"
-    ],
-    "desc": "负责中控工业互联网平台的产品运营，通过数据分析优化产品功能和用户体验。",
-    "requirements": [
-      "3年以上产品运营经验",
-      "有B端/工业领域经验优先",
-      "精通数据分析"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 63,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "355d4f25d0b0f6b6",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "中控技术招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.supcon.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 19,
-    "company": "比亚迪",
-    "type": "internet",
-    "title": "运营数据分析",
-    "city": "常州",
-    "salary": "18-28K·14薪",
-    "deadline": "2026-08-25",
-    "source": "比亚迪招聘(公众号)",
-    "url": "https://job.byd.com/",
-    "tags": [
-      "数据分析",
-      "运营",
-      "新能源",
-      "汽车"
-    ],
-    "desc": "负责比亚迪常州工厂的运营数据分析，包括生产效率、质量数据和供应链分析。",
-    "requirements": [
-      "2-3年数据分析经验",
-      "熟练使用Excel和BI工具",
-      "有制造业背景优先"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 59,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "40446f111531ee21",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "比亚迪招聘(公众号)"
-      ],
-      "raw_source_url": "https://job.byd.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 20,
-    "company": "大华股份",
-    "type": "state",
-    "title": "数字化运营",
-    "city": "杭州",
-    "salary": "18-30K·14薪",
-    "deadline": "2026-09-05",
-    "source": "大华招聘(公众号)",
-    "url": "https://dahua.zhiye.com/social?search=数字化运营",
-    "tags": [
-      "数字化运营",
-      "数据分析",
-      "安防",
-      "制造业"
-    ],
-    "desc": "负责大华数字化平台的运营工作，通过数据分析驱动运营策略优化和业务流程改进。",
-    "requirements": [
-      "3年以上运营经验",
-      "熟悉数据分析",
-      "有制造业/安防行业背景优先"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 49,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "09f21637cad5abf7",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "大华招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.dahuatech.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 21,
-    "company": "小红书",
-    "type": "internet",
-    "title": "社区运营",
-    "city": "上海",
-    "salary": "25-38K·14薪",
-    "deadline": "2026-08-18",
-    "source": "小红书招聘(公众号)",
-    "url": "https://job.xiaohongshu.com/social?keyword=社区运营",
-    "tags": [
-      "社区运营",
-      "内容运营",
-      "数据分析",
-      "用户增长"
-    ],
-    "desc": "负责小红书社区的内容运营和用户增长，通过数据分析优化推荐策略和社区氛围。",
-    "requirements": [
-      "3年以上社区/内容运营经验",
-      "精通数据分析",
-      "对生活方式内容有热情"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 49,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "c04ed5600ba9487a",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "小红书招聘(公众号)"
-      ],
-      "raw_source_url": "https://job.xiaohongshu.com"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 22,
-    "company": "SAP中国",
-    "type": "foreign",
-    "title": "客户运营专员",
-    "city": "上海",
-    "salary": "25-38K",
-    "deadline": "2026-08-30",
-    "source": "SAP招聘(公众号)",
-    "url": "https://jobs.sap.com/search/?q=运营&location=China",
-    "tags": [
-      "客户运营",
-      "SaaS",
-      "数据分析",
-      "B2B"
-    ],
-    "desc": "负责SAP中国客户的持续运营，通过数据分析提升客户使用深度和续费率。",
-    "requirements": [
-      "3年以上客户运营/CSM经验",
-      "有SaaS行业经验",
-      "较强的数据思维"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 49,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "058b7de196c31809",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "SAP招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.sap.cn"
-    },
-    "recruit_type": "社招"
-  },
-  {
-    "id": 23,
-    "company": "天能集团",
-    "type": "state",
-    "title": "电商运营",
-    "city": "湖州",
-    "salary": "15-25K·13薪",
-    "deadline": "2026-09-15",
-    "source": "天能招聘(公众号)",
-    "url": "https://jobs.51job.com/all/co3926361.html",
-    "tags": [
-      "电商运营",
-      "数据分析",
-      "新能源",
-      "国企"
-    ],
-    "desc": "负责天能集团电商平台的日常运营和数据分析，优化线上销售策略。",
-    "requirements": [
-      "2-3年电商运营经验",
-      "有数据分析能力",
-      "本科及以上"
-    ],
-    "status": "可投递",
-    "note": "",
-    "match": 49,
-    "source_type": "manual",
-    "_meta": {
-      "fingerprint": "f682451bf46897a0",
-      "first_seen": "2026-07-27",
-      "last_seen": "2026-07-27",
-      "last_updated": "2026-07-27",
-      "sources": [
-        "天能招聘(公众号)"
-      ],
-      "raw_source_url": "https://www.tianneng.com.cn"
-    },
-    "recruit_type": "社招"
+      "last_updated": "2026-07-27"
+    }
   }
 ]
