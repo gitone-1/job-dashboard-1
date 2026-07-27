@@ -500,6 +500,20 @@
         <p>📌 <b>岗位偏好</b>：非管理岗(不含专家/经理/主管头衔)</p>
       </div>
     </div>
+
+    <!-- 状态同步设置 -->
+    <div class="resume-panel show" id="syncPanel">
+      <h3 style="margin-top: 8px;">🔄 跨设备同步</h3>
+      <div style="font-size:12px; line-height:1.8; margin-top:8px; color: var(--text-secondary);">
+        <p id="syncStatus" style="color:#00b894;">✅ 本地模式（仅当前设备）</p>
+        <input type="password" id="tokenInput" placeholder="输入 GitHub Token 开启同步..."
+               style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:11px;margin:4px 0;">
+        <button class="btn btn-outline" style="font-size:11px;padding:4px 10px;width:100%;" onclick="setupSyncToken()">
+          💾 保存并开启同步
+        </button>
+        <p style="font-size:10px;margin-top:4px;">Token 保存在本地浏览器，不会上传到服务器</p>
+      </div>
+    </div>
   </aside>
 
   <!-- Main Content -->
@@ -638,9 +652,11 @@ async function loadJobsData() {
 }
 
 async function initApp() {
+  // 从 localStorage 读取已保存的 token
+  GITHUB_TOKEN = localStorage.getItem('gh_sync_token') || '';
   await loadResumeProfile();
   await loadJobsData();
-  restoreStatusFromStorage();  // 恢复之前标记的状态（不匹配/已投递/待投递）
+  restoreStatusFromStorage();  // 恢复之前标记的状态（优先远程）
   updateTimeBadge();
   renderJobs();
 }
@@ -935,47 +951,180 @@ function toggleStatus(id, newStatus) {
       return;
     }
     job.status = newStatus;
-    // 持久化到 localStorage
+    // 持久化
     saveStatusToStorage();
+    // 如果有 token，同步到 GitHub
+    if (GITHUB_TOKEN) syncStatusToGithub();
     renderJobs();
   }
 }
 
 // ═══════════════════════════════════════
-//  localStorage 持久化（记住用户标记的状态）
+//  状态持久化（localStorage + GitHub远程同步）
 // ═══════════════════════════════════════
+const STATUS_FILE = 'https://gitone-1.github.io/job-dashboard-1/user_status.json';
+const GITHUB_API = 'https://api.github.com/repos/gitone-1/job-dashboard-1/contents/user_status.json';
+
 function saveStatusToStorage() {
   const statusMap = {};
   JOBS.forEach(j => {
-    // 只保存用户主动修改过的状态（非"可投递"默认状态）
     if (j.status !== '可投递') {
-      statusMap[j._meta?.fingerprint || j.company + '|' + j.title + '|' + j.city] = j.status;
+      statusMap[j._meta?.fingerprint || j.company + '|' + j.title + '|' + j.city] = {
+        status: j.status,
+        time: new Date().toISOString().slice(0, 10)
+      };
     }
   });
-  try {
-    localStorage.setItem('job_dashboard_status', JSON.stringify(statusMap));
-  } catch(e) {}
+  // 本地快速存储
+  try { localStorage.setItem('job_dashboard_status', JSON.stringify(statusMap)); } catch(e) {}
 }
 
 function restoreStatusFromStorage() {
+  // 先尝试从 GitHub 远程加载（跨设备同步）
+  fetchStatusFromRemote().then(remoteStatus => {
+    if (remoteStatus && Object.keys(remoteStatus).length > 0) {
+      applyStatusMap(remoteStatus, '远程(GitHub)');
+      // 同步到本地
+      try { localStorage.setItem('job_dashboard_status', JSON.stringify(remoteStatus)); } catch(e) {}
+    } else {
+      // 远程没有，用本地
+      try {
+        const saved = localStorage.getItem('job_dashboard_status');
+        if (saved) {
+          applyStatusMap(JSON.parse(saved), '本地存储');
+        }
+      } catch(e) {}
+    }
+  }).catch(() => {
+    // 远程加载失败，用本地
+    try {
+      const saved = localStorage.getItem('job_dashboard_status');
+      if (saved) applyStatusMap(JSON.parse(saved), '本地存储');
+    } catch(e) {}
+  });
+}
+
+async function fetchStatusFromRemote() {
   try {
-    const saved = localStorage.getItem('job_dashboard_status');
-    if (!saved) return;
-    const statusMap = JSON.parse(saved);
-    JOBS.forEach(j => {
-      const key = j._meta?.fingerprint || j.company + '|' + j.title + '|' + j.city;
-      if (statusMap[key]) {
-        j.status = statusMap[key];
-      }
-    });
-    console.log('已恢复状态标记:', Object.keys(statusMap).length, '条');
+    const resp = await fetch(STATUS_FILE);
+    if (resp.ok) {
+      return await resp.json();
+    }
   } catch(e) {}
+  return null;
+}
+
+function applyStatusMap(statusMap, source) {
+  let count = 0;
+  JOBS.forEach(j => {
+    const key = j._meta?.fingerprint || j.company + '|' + j.title + '|' + j.city;
+    if (statusMap[key]) {
+      const st = typeof statusMap[key] === 'string' ? statusMap[key] : statusMap[key].status;
+      if (st && st !== '可投递') {
+        j.status = st;
+        count++;
+      }
+    }
+  });
+  if (count > 0) console.log(`状态恢复(${source}): ${count}条`);
 }
 
 function clearStoredStatus() {
   localStorage.removeItem('job_dashboard_status');
   renderJobs();
 }
+
+// ═══════════════════════════════════════
+//  状态同步到 GitHub（需要 token）
+// ═══════════════════════════════════════
+let GITHUB_TOKEN = '';
+
+async function syncStatusToGithub() {
+  // 收集当前所有状态
+  const statusMap = {};
+  JOBS.forEach(j => {
+    if (j.status !== '可投递') {
+      statusMap[j._meta?.fingerprint || j.company + '|' + j.title + '|' + j.city] = {
+        status: j.status,
+        time: new Date().toISOString().slice(0, 10)
+      };
+    }
+  });
+
+  // 同时存到本地
+  try { localStorage.setItem('job_dashboard_status', JSON.stringify(statusMap)); } catch(e) {}
+
+  // 获取当前远程文件 SHA（更新需要）
+  let sha = '';
+  try {
+    const resp = await fetch(GITHUB_API, {
+      headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      sha = data.sha || '';
+    }
+  } catch(e) {}
+
+  // 上传到 GitHub
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(statusMap, null, 2))));
+  try {
+    const resp = await fetch(GITHUB_API, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: `状态更新 - ${new Date().toISOString().slice(0, 10)}`,
+        content: content,
+        sha: sha || undefined,
+      })
+    });
+    if (resp.ok) {
+      console.log('状态已同步到 GitHub');
+      return true;
+    }
+  } catch(e) {
+    console.warn('GitHub同步失败:', e);
+  }
+  return false;
+}
+
+// ═══════════════════════════════════════
+//  同步设置
+// ═══════════════════════════════════════
+function setupSyncToken() {
+  const input = document.getElementById('tokenInput');
+  const token = input.value.trim();
+  if (!token || !token.startsWith('ghp_')) {
+    alert('请输入有效的 GitHub Token（以 ghp_ 开头）');
+    return;
+  }
+  GITHUB_TOKEN = token;
+  localStorage.setItem('gh_sync_token', token);
+  document.getElementById('syncStatus').textContent = '🔄 已开启跨设备同步';
+  document.getElementById('syncStatus').style.color = '#0984e3';
+  input.value = '';
+  // 立即同步一次
+  syncStatusToGithub().then(ok => {
+    if (ok) {
+      document.getElementById('syncStatus').textContent = '✅ 跨设备同步已开启';
+      document.getElementById('syncStatus').style.color = '#00b894';
+    }
+  });
+}
+
+// 初始化时检查 token
+(function checkSyncStatus() {
+  setTimeout(() => {
+    if (GITHUB_TOKEN) {
+      document.getElementById('syncStatus').textContent = '✅ 跨设备同步已开启';
+      document.getElementById('syncStatus').style.color = '#00b894';
+    }
+  }, 2000);
+})();
 
 function openLink(url) {
   window.open(url, '_blank');
