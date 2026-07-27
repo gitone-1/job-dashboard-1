@@ -1,0 +1,32 @@
+{
+  "name": "王婷婷",
+  "education": {
+    "degree": "本科",
+    "major": "通信工程",
+    "school": "山东科技大学"
+  },
+  "experienceYears": 5,
+  "skills": [
+    "SQL", "PowerBI", "Excel", "数据分析", "用户运营",
+    "数据运营", "策略运营", "PPT", "Word", "CRM", "数据可视化"
+  ],
+  "keywords": [
+    "数据运营", "产品运营", "策略运营", "用户运营", "增长运营",
+    "数据分析", "运营", "数据", "指标", "转化"
+  ],
+  "roles": ["数据运营", "策略运营", "互联网运营", "产品运营"],
+  "industry": ["互联网", "大健康", "IT服务"],
+  "highlights": [
+    "0-1指标体系搭建", "转化率提升", "DAU提升",
+    "项目管理", "跨部门协调"
+  ],
+  "targetCities": [
+    "苏州", "杭州", "上海", "无锡", "嘉兴", "湖州", "常州", "绍兴"
+  ],
+  "excludeTitleKeywords": [
+    "专家", "经理", "主管", "总监", "负责人",
+    "head", "lead", "director", "senior"
+  ],
+  "preferredCompanyTypes": ["foreign", "state", "internet"],
+  "preferredRoles": ["产品运营", "数据运营", "策略运营", "用户运营"]
+}

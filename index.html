@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>求职工作台 — 智能岗位匹配</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --text: #2d3436;
+      --text-secondary: #636e72;
+      --accent: #0984e3;
+      --accent-light: #dff0ff;
+      --success: #00b894;
+      --warning: #fdcb6e;
+      --danger: #e17055;
+      --border: #e1e4e8;
+      --tag-bg: #f0f0f0;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.12);
+      --radius: 10px;
+      --sidebar-w: 280px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      background: linear-gradient(135deg, #2d3436 0%, #434a54 100%);
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header .logo { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+    .header .logo span { color: #74b9ff; }
+    .header .badge-row { display: flex; gap: 8px; align-items: center; }
+    .header .badge {
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .header .badge.match { background: #00b894; }
+
+    /* ─── Layout ─── */
+    .main-container { display: flex; min-height: calc(100vh - 56px); }
+
+    /* ─── Sidebar ─── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--card-bg);
+      border-right: 1px solid var(--border);
+      padding: 20px;
+      overflow-y: auto;
+      position: sticky;
+      top: 56px;
+      height: calc(100vh - 56px);
+    }
+    .sidebar h3 { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .filter-group { margin-bottom: 20px; }
+    .filter-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .filter-group select,
+    .filter-group input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      background: var(--bg);
+    }
+    .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .chip:hover { border-color: var(--accent); }
+    .chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .match-bar { margin: 16px 0; }
+    .match-bar .bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+    .match-bar .bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .match-bar .bar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s; }
+
+    .btn-reset {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn-reset:hover { background: var(--bg); }
+
+    /* ─── Content ─── */
+    .content { flex: 1; padding: 20px 24px; overflow-y: auto; }
+
+    .stats-row { display: flex; gap: 12px; margin-bottom: 20px; }
+    .stat-card {
+      flex: 1;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .stat-card .stat-num { font-size: 28px; font-weight: 700; color: var(--accent); }
+    .stat-card .stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+    .toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+    .toolbar input {
+      flex: 1;
+      min-width: 200px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .toolbar .sort-select {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      background: var(--card-bg);
+    }
+
+    .result-count { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+
+    /* ─── Job Cards ─── */
+    .job-list { display: flex; flex-direction: column; gap: 12px; }
+    .job-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 20px;
+      transition: box-shadow 0.2s, transform 0.15s;
+      cursor: pointer;
+      border-left: 4px solid transparent;
+      position: relative;
+    }
+    .job-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+    .job-card.match-high { border-left-color: #00b894; }
+    .job-card.match-mid { border-left-color: #fdcb6e; }
+    .job-card.match-low { border-left-color: #e17055; }
+
+    .job-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+    .job-card .company { font-size: 16px; font-weight: 700; color: var(--text); }
+    .job-card .company-type {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .type-foreign { background: #dff0ff; color: #0984e3; }
+    .type-state { background: #ffeaa7; color: #d68910; }
+    .type-internet { background: #dfe6e9; color: #2d3436; }
+    .type-gov { background: #fab1a0; color: #c0392b; }
+
+    .job-card .match-badge {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .match-badge.high { background: #d4f7e8; color: #00b894; }
+    .match-badge.mid { background: #fff3cd; color: #d68910; }
+    .match-badge.low { background: #fce4ec; color: #e17055; }
+
+    .job-card .job-title { font-size: 14px; font-weight: 600; color: var(--accent); margin: 6px 0 4px; }
+    .job-card .meta-row { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--text-secondary); margin: 8px 0; }
+    .job-card .meta-row span { display: flex; align-items: center; gap: 4px; }
+
+    .job-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+    .job-card .tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--tag-bg);
+    }
+
+    .job-card .card-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .job-card .btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); }
+    .btn-success { background: #00b894; color: #fff; }
+    .btn-warning { background: #fdcb6e; color: #2d3436; }
+    .btn-danger { background: #e17055; color: #fff; }
+
+    .deadline-urgent { color: #e17055; font-weight: 700; }
+
+    /* ─── Modal ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s;
+    }
+    .modal {
+      background: var(--card-bg);
+      border-radius: 12px;
+      max-width: 650px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .modal .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 22px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+    .modal h3 { font-size: 18px; margin-bottom: 4px; }
+    .modal .company-name { font-size: 14px; color: var(--text-secondary); }
+    .modal .section { margin: 16px 0; }
+    .modal .section h4 { font-size: 14px; margin-bottom: 6px; color: var(--accent); }
+    .modal .section ul { padding-left: 20px; font-size: 13px; }
+    .modal .section li { margin-bottom: 4px; }
+
+    /* ─── Status Tabs ─── */
+    .status-tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+    .status-tab {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .status-tab:hover { border-color: var(--accent); }
+    .status-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ─── Resume Panel ─── */
+    .resume-panel {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+    .resume-panel.show { display: block; }
+    .resume-panel .toggle-btn {
+      font-size: 13px;
+      color: var(--accent);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-weight: 600;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ─── Responsive Mobile ─── */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+        gap: 8px;
+      }
+      .header .logo {
+        font-size: 18px;
+        line-height: 1.4;
+        white-space: normal;
+        word-break: keep-all;
+      }
+      .header .badge-row {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 6px;
+      }
+      .header .badge {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+
+      .main-container { flex-direction: column; }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 16px;
+      }
+      .sidebar h3 { font-size: 13px; }
+      .filter-group { margin-bottom: 14px; }
+      .filter-group label { font-size: 12px; }
+      .chip { font-size: 11px; padding: 3px 8px; }
+
+      .content { padding: 12px; }
+
+      .stats-row {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .stat-card {
+        flex: 1 1 calc(25% - 8px);
+        min-width: 60px;
+        padding: 10px 4px;
+      }
+      .stat-card .stat-num { font-size: 18px; }
+      .stat-card .stat-label { font-size: 10px; }
+
+      .status-tabs { flex-wrap: wrap; gap: 6px; }
+      .status-tab { font-size: 12px; padding: 4px 10px; }
+
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .toolbar input { width: 100%; }
+      .toolbar .sort-select { width: 100%; }
+
+      .job-card {
+        padding: 14px;
+        border-left-width: 3px;
+      }
+      .job-card .card-header { gap: 8px; }
+      .job-card .company { font-size: 14px; }
+      .job-card .company-type {
+        font-size: 10px;
+        padding: 1px 5px;
+      }
+      .job-card .job-title { font-size: 13px; }
+      .job-card .meta-row { gap: 8px; font-size: 11px; }
+      .job-card .tags { gap: 4px; }
+      .job-card .tag { font-size: 10px; padding: 2px 6px; }
+      .job-card .card-actions {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .job-card .btn {
+        flex: 1 1 calc(33% - 6px);
+        min-width: 60px;
+        padding: 6px 8px;
+        font-size: 11px;
+        text-align: center;
+      }
+
+      .modal {
+        width: 95%;
+        padding: 16px;
+        max-height: 90vh;
+      }
+      .modal h3 { font-size: 16px; }
+      .modal .company-name { font-size: 12px; }
+      .modal .section { margin: 12px 0; }
+      .modal .section ul { font-size: 12px; }
+
+      .resume-panel { padding: 12px; }
+      .resume-panel p { font-size: 11px; line-height: 1.7; }
+    }
+
+    @media (max-width: 375px) {
+      .job-card .btn {
+        flex: 1 1 calc(50% - 6px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">🎯 <span>求职工作台</span> — 智能岗位匹配</div>
+  <div class="badge-row">
+    <div class="badge">👩‍💼 王婷婷</div>
+    <div class="badge">📊 数据运营 / 产品运营</div>
+    <div class="badge">📍 苏杭区域(苏州·杭州·上海·无锡等)</div>
+    <div class="badge match" id="resumeMatchBadge">📋 简历已解析</div>
+    <div class="badge" id="updateBadge" style="background:rgba(116,185,255,0.2);">🕐 更新: 加载中...</div>
+  </div>
+</div>
+
+<div class="main-container">
+
+  <!-- Sidebar Filters -->
+  <aside class="sidebar">
+    <h3>🔍 筛选条件</h3>
+
+    <div class="filter-group">
+      <label>公司类型</label>
+      <div class="filter-chips" id="typeChips">
+        <span class="chip active" data-type="all">全部</span>
+        <span class="chip" data-type="foreign">外企</span>
+        <span class="chip" data-type="state">央企/国企</span>
+        <span class="chip" data-type="internet">互联网大厂</span>
+        <span class="chip" data-type="gov">事业编/公务员</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>岗位类别</label>
+      <div class="filter-chips" id="roleChips">
+        <span class="chip active" data-role="all">全部</span>
+        <span class="chip" data-role="product">产品</span>
+        <span class="chip" data-role="operation">运营</span>
+        <span class="chip" data-role="data">数据运营</span>
+        <span class="chip" data-role="market">市场</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>工作城市</label>
+      <select id="cityFilter">
+        <option value="all">苏杭区域(全部)</option>
+        <option value="苏州">苏州</option>
+        <option value="杭州">杭州</option>
+        <option value="上海">上海(苏杭之间)</option>
+        <option value="嘉兴">嘉兴(苏杭之间)</option>
+        <option value="湖州">湖州(苏杭之间)</option>
+        <option value="无锡">无锡(近苏州)</option>
+        <option value="常州">常州(近苏州)</option>
+        <option value="绍兴">绍兴(近杭州)</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label>最低匹配度</label>
+      <div class="match-bar">
+        <div class="bar-label"><span id="matchLabel">60%</span><span>100%</span></div>
+        <input type="range" id="matchSlider" min="0" max="100" value="60" style="width:100%">
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>投递状态</label>
+      <select id="statusFilter">
+        <option value="all">全部</option>
+        <option value="可投递">可投递</option>
+        <option value="已投递">已投递</option>
+        <option value="待投递">待投递</option>
+        <option value="已截止">已截止</option>
+        <option value="不匹配">不匹配</option>
+      </select>
+    </div>
+
+    <button class="btn-reset" onclick="resetFilters()">🔄 重置全部筛选</button>
+
+    <!-- Resume Summary -->
+    <div class="resume-panel show" id="resumePanel">
+      <h3 style="margin-top: 16px;">📋 我的简历画像</h3>
+      <div style="font-size:12px; line-height:1.8; margin-top:8px; color: var(--text-secondary);">
+        <p>🎓 <b>学历</b>：山东科技大学 · 通信工程 本科</p>
+        <p>💼 <b>经验</b>：5-8年 · 数据运营/策略运营</p>
+        <p>🛠 <b>技能</b>：PowerBI、SQL、Excel、数据分析、用户运营</p>
+        <p>🏢 <b>经历</b>：同程集团(大健康)、中软国际、医联</p>
+        <p>📈 <b>亮点</b>���0-1指标体系搭建、转化率提升15%、DAU提升30%</p>
+        <p>🎯 <b>目标城市</b>：苏州、杭州、上海、无锡、嘉兴、湖州、常州、绍兴</p>
+        <p>📌 <b>岗位偏好</b>：非管理岗(不含专家/经理/主管头衔)</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num" id="statTotal">24</div><div class="stat-label">总岗位数</div></div>
+      <div class="stat-card"><div class="stat-num" id="statMatch" style="color:#00b894">18</div><div class="stat-label">匹配(≥70%)</div></div>
+      <div class="stat-card"><div class="stat-num" id="statOpen" style="color:#0984e3">15</div><div class="stat-label">可投递</div></div>
+      <div class="stat-card"><div class="stat-num" id="statDeadline" style="color:#e17055">3</div><div class="stat-label">即将截止</div></div>
+    </div>
+
+    <!-- Status Tabs -->
+    <div class="status-tabs" id="statusTabs">
+      <span class="status-tab active" data-tab="all">📋 全部</span>
+      <span class="status-tab" data-tab="可投递">✅ 可投递</span>
+      <span class="status-tab" data-tab="已投递">📤 已投递</span>
+      <span class="status-tab" data-tab="待投递">⭐ 待投递</span>
+      <span class="status-tab" data-tab="已截止">⛔ 已截止</span>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <input type="text" id="searchInput" placeholder="🔍 搜索公司名、岗位名、关键词..." oninput="renderJobs()">
+      <select class="sort-select" id="sortSelect" onchange="renderJobs()">
+        <option value="match">按匹配度 ↓</option>
+        <option value="deadline">按截止时间 ↑</option>
+        <option value="company">按公司名 ↑</option>
+      </select>
+      <button class="btn btn-outline" onclick="exportCSV()">📥 导出CSV</button>
+    </div>
+
+    <div class="result-count" id="resultCount">显示 24 个岗位</div>
+
+    <!-- Job List -->
+    <div class="job-list" id="jobList"></div>
+  </main>
+</div>
+
+<!-- Job Detail Modal -->
+<div class="modal-overlay" id="modalOverlay" style="display:none" onclick="closeModal(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  RESUME PROFILE (动态加载自 resume_profile.json)
+// ═══════════════════════════════════════
+const DEFAULT_RESUME_PROFILE = {
+  name: '王婷婷',
+  education: { degree: '本科', major: '通信工程', school: '山东科技大学' },
+  experienceYears: 5,
+  skills: ['SQL', 'PowerBI', 'Excel', '数据分析', '用户运营', '数据运营', '策略运营', 'PPT', 'Word', 'CRM', '数据可视化'],
+  keywords: ['数据运营', '产品运营', '策略运营', '用户运营', '增长运营', '数据分析', '运营', '数据', '指标', '转化'],
+  roles: ['数据运营', '策略运营', '互联网运营', '产品运营'],
+  industry: ['互联网', '大健康', 'IT服务'],
+  highlights: ['0-1指标体系搭建', '转化率提升', 'DAU提升', '项目管理', '跨部门协调'],
+};
+
+// ═══════════════════════════════════════
+//  DEFAULT JOBS (降级数据，当JSON加载失败时使用)
+// ═══════════════════════════════════════
+const DEFAULT_JOBS = [
+  { id:1, company:'同程集团', type:'internet', title:'策略运营', city:'苏州', salary:'25-38K·15薪', deadline:'2026-08-15', source:'同程招聘(公众号)', url:'https://app.mokahr.com/social-recruitment/ly/44706#/search?keyword=策略运营', tags:['策略运营','数据分析','用户运营','OTA'], desc:'负责同程旅行核心业务线的策略运营，通过数据复盘优化定价策略和活动营销方案。', requirements:['3年以上策略/数据运营经验','精通SQL和Excel','有OTA或电商经验优先'], status:'可投递', note:'同行经历加分！' },
+  { id:2, company:'阿里巴巴', type:'internet', title:'数据运营', city:'杭州', salary:'30-48K·16薪', deadline:'2026-08-15', source:'阿里巴巴招聘(公众号)', url:'https://talent.alibaba.com/off-campus/position-list?search=数据运营', tags:['数据运营','指标体系','SQL','电商'], desc:'负责淘宝/天猫业务线的数据运营，搭建数据指标体系。', requirements:['3-5年数据运营经验','精通SQL和BI工具'], status:'可投递', note:'' },
+  { id:3, company:'微软中国', type:'foreign', title:'产品运营', city:'苏州', salary:'28-45K·15薪', deadline:'2026-08-20', source:'微软招聘(公众号)', url:'https://careers.microsoft.com/v2/global/en/search.html?q=产品运营', tags:['产品运营','数据分析','SQL','PowerBI'], desc:'负责Microsoft 365产品的运营数据分析与策略优化。', requirements:['3-5年产品运营经验','精通SQL和数据分析工具','英语读写流利'], status:'可投递', note:'苏州园区' },
+  { id:4, company:'蚂蚁集团', type:'internet', title:'策略运营', city:'杭州', salary:'30-48K·16薪', deadline:'2026-08-18', source:'蚂蚁集团招聘(公众号)', url:'https://talent.antgroup.com/off-campus-position?search=策略运营', tags:['策略运营','数据分析','金融'], desc:'负责支付宝业务线的策略运营，通过数据分析和策略制定优化用户转化。', requirements:['3-5年策略/数据运营经验','精通数据分析'], status:'可投递', note:'' },
+  { id:5, company:'网易', type:'internet', title:'产品运营', city:'杭州', salary:'25-38K·16薪', deadline:'2026-08-22', source:'网易招聘(公众号)', url:'https://hr.163.com/job-list.html?search=产品运营', tags:['产品运营','用户运营','数据分析','内容'], desc:'负责网易云音乐等产品线的运营策略。', requirements:['3年以上产品运营经验','精通数据分析'], status:'可投递', note:'' },
+  { id:6, company:'华为', type:'internet', title:'产品数据运营', city:'苏州', salary:'28-45K·14薪', deadline:'2026-08-18', source:'华为招聘(公众号)', url:'https://career.huawei.com/reccampportal/portal5/social-recruitment.html?keywords=数据运营', tags:['数据运营','产品运营','指标体系','通信'], desc:'负责华为云/终端业务的数据运营，搭建数据指标体系。', requirements:['3-5年数据运营经验','精通SQL'], status:'可投递', note:'苏州研究所' },
+  { id:7, company:'亚马逊中国', type:'foreign', title:'数据运营', city:'上海', salary:'32-50K', deadline:'2026-08-10', source:'亚马逊招聘(公众号)', url:'https://www.amazon.jobs/zh/search?base_query=数据运营', tags:['数据运营','SQL','Tableau','跨境电商'], desc:'负责亚马逊卖家平台的数据运营，构建数据指标体系。', requirements:['3-5年数据分析/运营经验','精通SQL','英语流利'], status:'可投递', note:'即将截止' },
+  { id:8, company:'联合利华', type:'foreign', title:'用户增长运营', city:'上海', salary:'25-38K·14薪', deadline:'2026-08-25', source:'联合利华微招聘(公众号)', url:'https://careers.unilever.com.cn/search-jobs?k=用户增长运营', tags:['用户增长','私域运营','数据分析','快消'], desc:'负责联合利华中国区私域用户增长。', requirements:['3年以上用户运营/增长经验','熟悉私域运营体系'], status:'可投递', note:'' },
+  { id:9, company:'海康威视', type:'state', title:'数据运营工程师', city:'杭州', salary:'20-32K·14薪', deadline:'2026-08-30', source:'海康威视招聘(公众号)', url:'https://talent.hikvision.com/social/search?key=数据运营', tags:['数据运营','SQL','报表','物联网'], desc:'负责海康威视物联网平台的数据运营。', requirements:['3年以上数据运营经验','精通SQL'], status:'可投递', note:'' },
+  { id:10, company:'小红书', type:'internet', title:'社区运营', city:'上海', salary:'25-38K·14薪', deadline:'2026-08-18', source:'小红书招聘(公众号)', url:'https://job.xiaohongshu.com/social?keyword=社区运营', tags:['社区运营','内容运营','数据分析'], desc:'负责小红书社区的内容运营和用户增长。', requirements:['3年以上社区/内容运营经验','精通数据分析'], status:'可投递', note:'' },
+];
+
+// ═══════════════════════════════════════
+//  DATA STATE (运行时)
+// ═══════════════════════════════════════
+let RESUME_PROFILE = { ...DEFAULT_RESUME_PROFILE };
+let JOBS = [...DEFAULT_JOBS];
+let LAST_UPDATE = null;
+let DATA_SOURCE = '内置默认数据';
+
+// ═══════════════════════════════════════
+//  DATA LOADING (从 JSON 文件加载)
+// ═══════════════════════════════════════
+async function loadResumeProfile() {
+  try {
+    const resp = await fetch('./resume_profile.json');
+    if (resp.ok) {
+      RESUME_PROFILE = await resp.json();
+      console.log('简历画像加载成功');
+      return true;
+    }
+  } catch (e) {
+    console.warn('简历画像加载失败，使用默认值');
+  }
+  return false;
+}
+
+async function loadJobsData() {
+  const sources = [
+    { url: './jobs.json', label: '本地数据' },
+  ];
+
+  for (const src of sources) {
+    try {
+      const resp = await fetch(src.url);
+      if (resp.ok) {
+        const data = await resp.json();
+        if (Array.isArray(data) && data.length > 0) {
+          JOBS = data;
+          DATA_SOURCE = src.label;
+          // 重新计算匹配度
+          JOBS.forEach(j => { j.match = calcMatchScore(j); });
+          // 提取更新时间
+          const metaDates = JOBS.map(j => j._meta?.last_updated || j._meta?.last_seen).filter(Boolean);
+          LAST_UPDATE = metaDates.length > 0 ? metaDates.sort().reverse()[0] : new Date().toISOString().slice(0, 10);
+          console.log(`数据加载成功: ${JOBS.length} 条岗位 (来源: ${src.label}, 更新: ${LAST_UPDATE})`);
+          return true;
+        }
+      }
+    } catch (e) {
+      console.warn(`数据源不可用: ${src.url}`);
+    }
+  }
+
+  // 降级: 使用内置默认数据
+  console.warn('所有数据源不可用，使用内置默认数据');
+  JOBS = [...DEFAULT_JOBS];
+  DATA_SOURCE = '内置默认数据';
+  JOBS.forEach(j => { j.match = calcMatchScore(j); });
+  LAST_UPDATE = new Date().toISOString().slice(0, 10);
+  return false;
+}
+
+async function initApp() {
+  await loadResumeProfile();
+  await loadJobsData();
+  restoreStatusFromStorage();  // 恢复之前标记的状态（不匹配/已投递/待投递）
+  updateTimeBadge();
+  renderJobs();
+}
+
+// ═══════════════════════════════════════
+//  MATCH CALCULATION
+// ═══════════════════════════════════════
+function calcMatchScore(job) {
+  let score = 0;
+  const max = 100;
+
+  // Skill match (40%)
+  const skillHits = RESUME_PROFILE.skills.filter(s =>
+    job.tags.some(t => t.toLowerCase().includes(s.toLowerCase())) ||
+    (job.desc + job.requirements.join(' ')).toLowerCase().includes(s.toLowerCase())
+  ).length;
+  score += Math.min(skillHits / Math.max(job.tags.length, 1) * 40, 40);
+
+  // Role match (30%)
+  const roleHits = RESUME_PROFILE.roles.filter(r =>
+    job.title.toLowerCase().includes(r.toLowerCase()) ||
+    job.desc.toLowerCase().includes(r.toLowerCase())
+  ).length;
+  score += roleHits > 0 ? 30 : (job.title.includes('运营') ? 20 : 10);
+
+  // Keyword match (20%)
+  const kwHits = RESUME_PROFILE.keywords.filter(k =>
+    (job.desc + job.title + job.tags.join(' ')).toLowerCase().includes(k.toLowerCase())
+  ).length;
+  score += Math.min(kwHits / 5 * 20, 20);
+
+  // Experience match (10%)
+  const expMatch = (job.desc + job.requirements.join(' ')).toLowerCase();
+  if (expMatch.includes('5年') || expMatch.includes('5年以上')) score += 10;
+  else if (expMatch.includes('3年') || expMatch.includes('3-5年')) score += 7;
+  else score += 5;
+
+  return Math.min(Math.round(score), 100);
+}
+
+// Recalculate match scores
+JOBS.forEach(j => { j.match = calcMatchScore(j); });
+
+// ═══════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════
+let filters = {
+  type: 'all',
+  role: 'all',
+  city: 'all',
+  matchMin: 60,
+  status: 'all',
+  tab: 'all',
+  sort: 'match',
+  search: '',
+};
+
+// ═══════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════
+function getFilteredJobs() {
+  let jobs = [...JOBS];
+
+  if (filters.type !== 'all') jobs = jobs.filter(j => j.type === filters.type);
+  if (filters.role !== 'all') {
+    jobs = jobs.filter(j => {
+      const roleMap = { product: '产品', operation: '运营', data: '数据运营', market: '市场' };
+      const kw = roleMap[filters.role];
+      return j.title.includes(kw) || j.tags.some(t => t.includes(kw)) || j.desc.includes(kw);
+    });
+  }
+  if (filters.city !== 'all') jobs = jobs.filter(j => j.city === filters.city);
+  if (filters.matchMin > 0) jobs = jobs.filter(j => j.match >= filters.matchMin);
+  if (filters.status !== 'all') jobs = jobs.filter(j => j.status === filters.status);
+  if (filters.tab !== 'all') {
+    jobs = jobs.filter(j => j.status === filters.tab);
+  }
+  if (filters.search) {
+    const q = filters.search.toLowerCase();
+    jobs = jobs.filter(j =>
+      j.company.toLowerCase().includes(q) ||
+      j.title.toLowerCase().includes(q) ||
+      j.tags.some(t => t.toLowerCase().includes(q)) ||
+      j.city.toLowerCase().includes(q) ||
+      j.desc.toLowerCase().includes(q)
+    );
+  }
+
+  // Sort
+  if (filters.sort === 'match') jobs.sort((a,b) => b.match - a.match);
+  else if (filters.sort === 'deadline') jobs.sort((a,b) => a.deadline.localeCompare(b.deadline));
+  else if (filters.sort === 'company') jobs.sort((a,b) => a.company.localeCompare(b.company, 'zh'));
+
+  return jobs;
+}
+
+function getTypeLabel(type) {
+  const map = { foreign: '外企', state: '央企/国企', internet: '互联网大厂', gov: '事业编/公务员' };
+  return map[type] || type;
+}
+
+function getTypeClass(type) {
+  const map = { foreign: 'type-foreign', state: 'type-state', internet: 'type-internet', gov: 'type-gov' };
+  return map[type] || '';
+}
+
+function getMatchClass(match) {
+  if (match >= 80) return 'high';
+  if (match >= 60) return 'mid';
+  return 'low';
+}
+
+function isDeadlineSoon(deadline) {
+  const d = new Date(deadline);
+  const now = new Date();
+  const diff = (d - now) / (1000 * 60 * 60 * 24);
+  return diff <= 7;
+}
+
+function renderJobs() {
+  const jobs = getFilteredJobs();
+  const container = document.getElementById('jobList');
+  document.getElementById('resultCount').textContent = `显示 ${jobs.length} 个岗位`;
+
+  // Update stats
+  document.getElementById('statTotal').textContent = JOBS.length;
+  document.getElementById('statMatch').textContent = JOBS.filter(j => j.match >= 70).length;
+  document.getElementById('statOpen').textContent = JOBS.filter(j => j.status === '可投递').length;
+  document.getElementById('statDeadline').textContent = JOBS.filter(j => isDeadlineSoon(j.deadline) && j.status === '可投递').length;
+
+  container.innerHTML = jobs.map(j => {
+    const matchClass = getMatchClass(j.match);
+    const cardClass = `match-${matchClass}`;
+    const deadlineClass = isDeadlineSoon(j.deadline) && j.status === '可投递' ? 'deadline-urgent' : '';
+    const statusColor = j.status === '可投递' ? '#00b894' : j.status === '已投递' ? '#0984e3' : j.status === '已截止' ? '#e17055' : '#636e72';
+    const deadlineLabel = isDeadlineSoon(j.deadline) && j.status === '可投递' ? '⚠️ 即将截止' : '';
+
+    return `
+    <div class="job-card ${cardClass}" onclick="openDetail(${j.id})">
+      <div class="card-header">
+        <div>
+          <span class="company">${j.company}</span>
+          <span class="company-type ${getTypeClass(j.type)}">${getTypeLabel(j.type)}</span>
+          <span class="company-type" style="background:#dfe6e9;color:#636e72;margin-left:4px;">${j.city}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="match-badge ${matchClass}">🎯 ${j.match}% 匹配</span>
+          <span style="font-size:11px;padding:2px 8px;border-radius:8px;background:${statusColor}15;color:${statusColor};font-weight:600;">${j.status}</span>
+        </div>
+      </div>
+      <div class="job-title">📌 ${j.title}</div>
+      <div class="meta-row">
+        <span>💰 ${j.salary}</span>
+        <span>📅 发布：${j._meta?.first_seen || j._meta?.last_updated || j._meta?.last_seen || '--'}</span>
+        <span>⏰ 截止：<span class="${deadlineClass}">${j.deadline || '--'} ${deadlineLabel}</span></span>
+        <span>📡 来源：${j.source}</span>
+      </div>
+      <div class="tags">
+        ${j.tags.map(t => `<span class="tag">#${t}</span>`).join('')}
+      </div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">${j.desc}</div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        <button class="btn btn-primary" onclick="openDetail(${j.id})">📋 查看详情</button>
+        <button class="btn btn-outline" onclick="toggleStatus(${j.id},'待投递')">⭐ 收藏</button>
+        <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递')">✅ 标记已投</button>
+        <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 投递链接</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (jobs.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-secondary);">🔍 没有匹配的岗位，请调整筛选条件</div>';
+  }
+}
+
+// ═══════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════
+function openDetail(id) {
+  const j = JOBS.find(x => x.id === id);
+  if (!j) return;
+  const matchClass = getMatchClass(j.match);
+  const deadlineSoon = isDeadlineSoon(j.deadline) && j.status === '可投递';
+
+  document.getElementById('modalContent').innerHTML = `
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <h3>${j.title}</h3>
+    <div class="company-name">${j.company} · ${getTypeLabel(j.type)} · ${j.city}</div>
+    <div style="display:flex;gap:8px;margin-top:10px;align-items:center;">
+      <span class="match-badge ${matchClass}" style="font-size:16px;">🎯 匹配度 ${j.match}%</span>
+      <span style="font-size:13px;color:var(--text-secondary);">💰 ${j.salary}</span>
+      ${deadlineSoon ? '<span style="color:#e17055;font-weight:700;">⚠️ 即将截止</span>' : ''}
+    </div>
+
+    <div class="section">
+      <h4>📝 岗位描述</h4>
+      <p style="font-size:13px;line-height:1.8;">${j.desc}</p>
+    </div>
+
+    <div class="section">
+      <h4>✅ 任职要求</h4>
+      <ul>${j.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+    </div>
+
+    <div class="section">
+      <h4>🏷️ 技能标签</h4>
+      <div class="tags">${j.tags.map(t => `<span class="tag">#${t}</span>`).join('')}</div>
+    </div>
+
+    <div class="section">
+      <h4>📊 匹配分析</h4>
+      <ul style="list-style:none;padding:0;">
+        ${generateMatchAnalysis(j)}
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>📅 关键信息</h4>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <tr><td style="padding:6px 8px;color:var(--text-secondary);">发布日期</td><td style="padding:6px 8px;font-weight:700;">${j._meta?.first_seen || j._meta?.last_updated || '--'}</td></tr>
+        <tr><td style="padding:6px 8px;color:var(--text-secondary);">投递截止</td><td style="padding:6px 8px;font-weight:700;${deadlineSoon?'color:#e17055;':''}">${j.deadline || '--'}</td></tr>
+        <tr><td style="padding:6px 8px;color:var(--text-secondary);">招聘来源</td><td style="padding:6px 8px;">${j.source}</td></tr>
+        <tr><td style="padding:6px 8px;color:var(--text-secondary);">当前状态</td><td style="padding:6px 8px;font-weight:700;">${j.status} ${j.note ? '('+j.note+')' : ''}</td></tr>
+        <tr><td style="padding:6px 8px;color:var(--text-secondary);">投递链接</td><td style="padding:6px 8px;"><a href="${j.url}" target="_blank" style="color:var(--accent);">${j.url}</a></td></tr>
+      </table>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+      <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递');closeModal();">✅ 标记为已投递</button>
+      <button class="btn btn-warning" onclick="toggleStatus(${j.id},'待投递');closeModal();">⭐ 加入待投递</button>
+      <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 打开投递链接</button>
+      <button class="btn btn-danger" onclick="toggleStatus(${j.id},'不匹配');closeModal();">❌ 不匹配</button>
+    </div>
+  `;
+
+  document.getElementById('modalOverlay').style.display = 'flex';
+}
+
+function generateMatchAnalysis(job) {
+  const lines = [];
+  const allText = (job.desc + job.title + job.tags.join(' ') + job.requirements.join(' ')).toLowerCase();
+
+  // Skill matches
+  const matchedSkills = RESUME_PROFILE.skills.filter(s => allText.includes(s.toLowerCase()));
+  if (matchedSkills.length > 0) {
+    lines.push(`<li>✅ 技能匹配：${matchedSkills.join('、')} — 您的核心技能与岗位需求高度���合</li>`);
+  }
+
+  // Role matches
+  const matchedRoles = RESUME_PROFILE.roles.filter(r => allText.includes(r.toLowerCase()));
+  if (matchedRoles.length > 0) {
+    lines.push(`<li>✅ 角色匹配：${matchedRoles.join('、')} — 岗位方向与您的职业经历一致</li>`);
+  }
+
+  // Experience
+  if (allText.includes('5年') || allText.includes('3-5年')) {
+    lines.push(`<li>✅ 经验匹配：岗位要求与您的5年+经验匹配</li>`);
+  }
+
+  // Industry
+  const matchedIndustry = RESUME_PROFILE.industry.filter(i => allText.includes(i.toLowerCase()));
+  if (matchedIndustry.length > 0) {
+    lines.push(`<li>✅ 行业匹配：${matchedIndustry.join('、')} — 您的行业背景与岗位相关</li>`);
+  }
+
+  // Gaps
+  if (allText.includes('python') && !RESUME_PROFILE.skills.includes('Python')) {
+    lines.push('<li>⚠️ 建议补充：岗位要求Python技能，建议学习基础数据分析用Python</li>');
+  }
+  if (allText.includes('英语') || allText.includes('英文')) {
+    lines.push('<li>💡 注意：该岗位对英语有要求，请确保准备英文简历</li>');
+  }
+
+  if (lines.length === 0) lines.push('<li>📊 基本匹配，建议仔细阅读岗位要求后投递</li>');
+  return lines.join('');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════════
+//  ACTIONS
+// ═══════════════════════════════════════
+function toggleStatus(id, newStatus) {
+  const job = JOBS.find(j => j.id === id);
+  if (job) {
+    if (job.status === '已截止' && newStatus !== '已截止') {
+      alert('该岗位已截止，无法更改状态');
+      return;
+    }
+    job.status = newStatus;
+    // 持久化到 localStorage
+    saveStatusToStorage();
+    renderJobs();
+  }
+}
+
+// ═══════════════════════════════════════
+//  localStorage 持久化（记住用户标记的状态）
+// ═══════════════════════════════════════
+function saveStatusToStorage() {
+  const statusMap = {};
+  JOBS.forEach(j => {
+    // 只保存用户主动修改过的状态（非"可投递"默认状态）
+    if (j.status !== '可投递') {
+      statusMap[j._meta?.fingerprint || j.company + '|' + j.title + '|' + j.city] = j.status;
+    }
+  });
+  try {
+    localStorage.setItem('job_dashboard_status', JSON.stringify(statusMap));
+  } catch(e) {}
+}
+
+function restoreStatusFromStorage() {
+  try {
+    const saved = localStorage.getItem('job_dashboard_status');
+    if (!saved) return;
+    const statusMap = JSON.parse(saved);
+    JOBS.forEach(j => {
+      const key = j._meta?.fingerprint || j.company + '|' + j.title + '|' + j.city;
+      if (statusMap[key]) {
+        j.status = statusMap[key];
+      }
+    });
+    console.log('已恢复状态标记:', Object.keys(statusMap).length, '条');
+  } catch(e) {}
+}
+
+function clearStoredStatus() {
+  localStorage.removeItem('job_dashboard_status');
+  renderJobs();
+}
+
+function openLink(url) {
+  window.open(url, '_blank');
+}
+
+function exportCSV() {
+  const jobs = getFilteredJobs();
+  const headers = ['公司','类型','岗位','城市','薪资','匹配度','截止时间','来源','状态','描述'];
+  const rows = jobs.map(j => [
+    j.company, getTypeLabel(j.type), j.title, j.city, j.salary,
+    j.match+'%', j.deadline, j.source, j.status, j.desc
+  ]);
+  const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '岗位匹配清单_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+// ═══════════════════════════════════════
+//  FILTER EVENTS
+// ═══════════════════════════════════════
+document.getElementById('typeChips').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')) {
+    document.querySelectorAll('#typeChips .chip').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    filters.type = e.target.dataset.type;
+    renderJobs();
+  }
+});
+
+document.getElementById('roleChips').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')) {
+    document.querySelectorAll('#roleChips .chip').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    filters.role = e.target.dataset.role;
+    renderJobs();
+  }
+});
+
+document.getElementById('cityFilter').addEventListener('change', e => {
+  filters.city = e.target.value;
+  renderJobs();
+});
+
+document.getElementById('matchSlider').addEventListener('input', e => {
+  filters.matchMin = parseInt(e.target.value);
+  document.getElementById('matchLabel').textContent = filters.matchMin + '%';
+  renderJobs();
+});
+
+document.getElementById('statusFilter').addEventListener('change', e => {
+  filters.status = e.target.value;
+  renderJobs();
+});
+
+document.getElementById('statusTabs').addEventListener('click', e => {
+  if (e.target.classList.contains('status-tab')) {
+    document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    filters.tab = e.target.dataset.tab;
+    document.getElementById('statusFilter').value = 'all';
+    filters.status = 'all';
+    renderJobs();
+  }
+});
+
+document.getElementById('sortSelect').addEventListener('change', e => {
+  filters.sort = e.target.value;
+  renderJobs();
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  filters.search = e.target.value;
+  renderJobs();
+});
+
+function resetFilters() {
+  filters = { type: 'all', role: 'all', city: 'all', matchMin: 70, status: 'all', tab: 'all', sort: 'match', search: '' };
+  document.querySelectorAll('#typeChips .chip').forEach((c,i) => c.classList.toggle('active', i===0));
+  document.querySelectorAll('#roleChips .chip').forEach((c,i) => c.classList.toggle('active', i===0));
+  document.getElementById('cityFilter').value = 'all';
+  document.getElementById('matchSlider').value = 60;
+  document.getElementById('matchLabel').textContent = '60%';
+  document.getElementById('statusFilter').value = 'all';
+  document.querySelectorAll('.status-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  document.getElementById('sortSelect').value = 'match';
+  document.getElementById('searchInput').value = '';
+  renderJobs();
+}
+
+function updateTimeBadge() {
+  const badge = document.getElementById('updateBadge');
+  if (LAST_UPDATE) {
+    badge.textContent = '🕐 更新: ' + LAST_UPDATE;
+    badge.title = '数据来源: ' + DATA_SOURCE;
+  } else {
+    badge.textContent = '🕐 更新: --';
+  }
+}
+
+// ═══════════════════════════════════════
+//  INIT (异步加载数据后渲染)
+// ═══════════════════════════════════════
+initApp();
+</script>
+
+</body>
+</html>

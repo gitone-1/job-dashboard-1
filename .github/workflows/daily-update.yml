@@ -1,0 +1,55 @@
+# ═══════════════════════════════════════════════════════════
+# 求职工作台 - 每日自动更新
+# 每天 UTC 22:00 (北京时间 06:00) 自动运行爬虫流水线
+# 也支持手动触发 (workflow_dispatch)
+# ═══════════════════════════════════════════════════════════
+
+name: 每日岗位更新
+
+on:
+  schedule:
+    # 每天 UTC 22:00 = 北京时间次日 06:00
+    - cron: '0 22 * * *'
+  workflow_dispatch:  # 支持手动触发
+
+jobs:
+  scrape-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          pip install requests beautifulsoup4 lxml pyyaml playwright
+          playwright install chromium --with-deps
+
+      - name: 运行数据抓取流水线
+        run: |
+          cd job-dashboard
+          python3 pipeline/pipeline.py
+
+      - name: 提交更新后的数据
+        run: |
+          git config user.name "Job Bot"
+          git config user.email "job-bot@example.com"
+          git add job-dashboard/jobs.json job-dashboard/data/last_update.txt
+          if git diff --staged --quiet; then
+            echo "没有新数据，跳过提交"
+          else
+            git commit -m "auto: 每日岗位更新 $(date +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./job-dashboard
+          publish_branch: gh-pages
