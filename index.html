@@ -807,7 +807,7 @@ function renderJobs() {
           <span style="font-size:11px;padding:2px 8px;border-radius:8px;background:${statusColor}15;color:${statusColor};font-weight:600;">${j.status}</span>
         </div>
       </div>
-      <div class="job-title">📌 ${j.title}</div>
+      <div class="job-title">📌 ${j.title} <span style="font-size:10px;color:${j.recruit_type==='社招'?'#00b894':'#0984e3'};background:${j.recruit_type==='社招'?'#d4f7e8':'#dff0ff'};padding:1px 6px;border-radius:8px;vertical-align:middle;">${j.recruit_type||'社招'}</span></div>
       <div class="meta-row">
         <span>💰 ${j.salary}</span>
         <span>📅 发布：${j._meta?.first_seen || j._meta?.last_updated || j._meta?.last_seen || '--'}</span>

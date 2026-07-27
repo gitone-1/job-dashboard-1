@@ -34,7 +34,8 @@
         "同程招聘(公众号)"
       ],
       "raw_source_url": "https://www.ly.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 2,
@@ -71,7 +72,8 @@
         "蚂蚁集团招聘(公众号)"
       ],
       "raw_source_url": "https://talent.antgroup.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 3,
@@ -109,7 +111,8 @@
         "亚马逊招聘(公众号)"
       ],
       "raw_source_url": "https://www.amazon.jobs"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 4,
@@ -119,7 +122,7 @@
     "city": "苏州",
     "salary": "22-35K·14薪",
     "deadline": "2026-08-25",
-    "source": "博世中国人才苑(公众号)",
+    "source": "博世中国人才苑(公众号)/BOSS直聘",
     "url": "https://www.zhipin.com/gongsi/job/c101190400/a49812b0e486f2df0nB82N-8.html",
     "tags": [
       "数字化运营",
@@ -134,7 +137,7 @@
       "有制造业背景优先"
     ],
     "status": "可投递",
-    "note": "",
+    "note": "社招·苏州·BOSS直聘投递",
     "match": 83,
     "source_type": "manual",
     "_meta": {
@@ -146,7 +149,8 @@
         "博世招聘(公众号)"
       ],
       "raw_source_url": "https://www.bosch.com.cn"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 5,
@@ -183,7 +187,8 @@
         "海康威视招聘(公众号)"
       ],
       "raw_source_url": "https://www.hikvision.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 6,
@@ -220,7 +225,8 @@
         "中国电信招聘(公众号)"
       ],
       "raw_source_url": "https://zhaopin.telecomjs.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 7,
@@ -257,7 +263,8 @@
         "敏实招聘(公众号)"
       ],
       "raw_source_url": "https://www.minthgroup.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 8,
@@ -294,7 +301,8 @@
         "药明康德招聘(公众号)"
       ],
       "raw_source_url": "https://www.wuxiapptec.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 9,
@@ -332,7 +340,8 @@
         "微软招聘(公众号)"
       ],
       "raw_source_url": "https://careers.microsoft.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 10,
@@ -369,7 +378,8 @@
         "华为招聘(公众号)"
       ],
       "raw_source_url": "https://career.huawei.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 11,
@@ -406,7 +416,8 @@
         "网易招聘(公众号)"
       ],
       "raw_source_url": "https://hr.163.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 12,
@@ -443,7 +454,8 @@
         "吉利招聘(公众号)"
       ],
       "raw_source_url": "https://job.geely.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 13,
@@ -481,7 +493,8 @@
         "阿里巴巴招聘(公众号)"
       ],
       "raw_source_url": "https://talent.alibaba.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 14,
@@ -518,7 +531,8 @@
         "SK海力士招聘(公众号)"
       ],
       "raw_source_url": "https://www.skhynix.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 15,
@@ -555,7 +569,8 @@
         "联合利华微招聘(公众号)"
       ],
       "raw_source_url": "https://www.unilever.com.cn"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 16,
@@ -592,7 +607,8 @@
         "拼多多招聘(公众号)"
       ],
       "raw_source_url": "https://careers.pinduoduo.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 17,
@@ -629,7 +645,8 @@
         "中控技术招聘(公众号)"
       ],
       "raw_source_url": "https://www.supcon.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 18,
@@ -666,7 +683,8 @@
         "比亚迪招聘(公众号)"
       ],
       "raw_source_url": "https://job.byd.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 19,
@@ -703,7 +721,8 @@
         "大华招聘(公众号)"
       ],
       "raw_source_url": "https://www.dahuatech.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 20,
@@ -740,7 +759,8 @@
         "小红书招聘(公众号)"
       ],
       "raw_source_url": "https://job.xiaohongshu.com"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 21,
@@ -777,7 +797,8 @@
         "SAP招聘(公众号)"
       ],
       "raw_source_url": "https://www.sap.cn"
-    }
+    },
+    "recruit_type": "社招"
   },
   {
     "id": 22,
@@ -814,6 +835,7 @@
         "天能招聘(公众号)"
       ],
       "raw_source_url": "https://www.tianneng.com.cn"
-    }
+    },
+    "recruit_type": "社招"
   }
 ]
