@@ -1,6 +1,32 @@
 [
   {
-    "id": 1,
+    "company": "卡特彼勒",
+    "type": "foreign",
+    "title": "用户运营",
+    "city": "杭州",
+    "salary": "面议",
+    "deadline": "",
+    "source": "微信公众号(卡特彼勒招聘)",
+    "url": "",
+    "source_type": "wechat",
+    "tags": [
+      "用户运营"
+    ],
+    "desc": "卡特彼勒杭州用户运营岗位",
+    "requirements": [],
+    "status": "可投递",
+    "note": "真实抓取·社招",
+    "match": 73,
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "last_updated": "2026-07-27"
+    },
+    "id": 1
+  },
+  {
+    "id": 2,
     "company": "同程集团",
     "type": "internet",
     "title": "策略运营",
@@ -38,7 +64,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 2,
+    "id": 3,
     "company": "蚂蚁集团",
     "type": "internet",
     "title": "策略运营",
@@ -76,7 +102,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 3,
+    "id": 4,
     "company": "亚马逊中国",
     "type": "foreign",
     "title": "数据运营",
@@ -115,7 +141,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 4,
+    "id": 5,
     "company": "博世中国",
     "type": "foreign",
     "title": "数字化运营专员",
@@ -153,7 +179,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 5,
+    "id": 6,
     "company": "海康威视",
     "type": "state",
     "title": "数据运营工程师",
@@ -191,7 +217,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 6,
+    "id": 7,
     "company": "中国电信",
     "type": "state",
     "title": "数据运营工程师",
@@ -229,7 +255,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 7,
+    "id": 8,
     "company": "敏实集团",
     "type": "foreign",
     "title": "数字化运营",
@@ -267,7 +293,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 8,
+    "id": 9,
     "company": "药明康德",
     "type": "foreign",
     "title": "数据运营",
@@ -305,7 +331,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 9,
+    "id": 10,
     "company": "微软中国",
     "type": "foreign",
     "title": "产品运营",
@@ -344,7 +370,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 10,
+    "id": 11,
     "company": "华为",
     "type": "internet",
     "title": "产品数据运营",
@@ -382,7 +408,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 11,
+    "id": 12,
     "company": "网易",
     "type": "internet",
     "title": "产品运营",
@@ -420,7 +446,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 12,
+    "id": 13,
     "company": "吉利汽车",
     "type": "internet",
     "title": "用户运营",
@@ -458,7 +484,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 13,
+    "id": 14,
     "company": "阿里巴巴",
     "type": "internet",
     "title": "数据运营",
@@ -497,7 +523,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 14,
+    "id": 15,
     "company": "SK海力士",
     "type": "foreign",
     "title": "运营数据分析",
@@ -535,7 +561,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 15,
+    "id": 16,
     "company": "联合利华",
     "type": "foreign",
     "title": "用户增长运营",
@@ -573,7 +599,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 16,
+    "id": 17,
     "company": "拼多多",
     "type": "internet",
     "title": "用户运营",
@@ -611,7 +637,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 17,
+    "id": 18,
     "company": "浙江中控",
     "type": "state",
     "title": "产品运营",
@@ -649,7 +675,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 18,
+    "id": 19,
     "company": "比亚迪",
     "type": "internet",
     "title": "运营数据分析",
@@ -687,7 +713,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 19,
+    "id": 20,
     "company": "大华股份",
     "type": "state",
     "title": "数字化运营",
@@ -725,7 +751,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 20,
+    "id": 21,
     "company": "小红书",
     "type": "internet",
     "title": "社区运营",
@@ -763,7 +789,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 21,
+    "id": 22,
     "company": "SAP中国",
     "type": "foreign",
     "title": "客户运营专员",
@@ -801,7 +827,7 @@
     "recruit_type": "社招"
   },
   {
-    "id": 22,
+    "id": 23,
     "company": "天能集团",
     "type": "state",
     "title": "电商运营",
