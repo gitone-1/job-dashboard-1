@@ -656,7 +656,7 @@ async function initApp() {
   GITHUB_TOKEN = localStorage.getItem('gh_sync_token') || '';
   await loadResumeProfile();
   await loadJobsData();
-  restoreStatusFromStorage();  // 恢复之前标记的状态（优先远程）
+  await restoreStatusFromStorage();  // 等待状态恢复完成
   updateTimeBadge();
   renderJobs();
 }
@@ -979,29 +979,24 @@ function saveStatusToStorage() {
   try { localStorage.setItem('job_dashboard_status', JSON.stringify(statusMap)); } catch(e) {}
 }
 
-function restoreStatusFromStorage() {
+async function restoreStatusFromStorage() {
   // 先尝试从 GitHub 远程加载（跨设备同步）
-  fetchStatusFromRemote().then(remoteStatus => {
+  try {
+    const remoteStatus = await fetchStatusFromRemote();
     if (remoteStatus && Object.keys(remoteStatus).length > 0) {
       applyStatusMap(remoteStatus, '远程(GitHub)');
-      // 同步到本地
       try { localStorage.setItem('job_dashboard_status', JSON.stringify(remoteStatus)); } catch(e) {}
-    } else {
-      // 远程没有，用本地
-      try {
-        const saved = localStorage.getItem('job_dashboard_status');
-        if (saved) {
-          applyStatusMap(JSON.parse(saved), '本地存储');
-        }
-      } catch(e) {}
+      return;
     }
-  }).catch(() => {
-    // 远程加载失败，用本地
-    try {
-      const saved = localStorage.getItem('job_dashboard_status');
-      if (saved) applyStatusMap(JSON.parse(saved), '本地存储');
-    } catch(e) {}
-  });
+  } catch(e) {}
+
+  // 远程没有或失败，用本地
+  try {
+    const saved = localStorage.getItem('job_dashboard_status');
+    if (saved) {
+      applyStatusMap(JSON.parse(saved), '本地存储');
+    }
+  } catch(e) {}
 }
 
 async function fetchStatusFromRemote() {
