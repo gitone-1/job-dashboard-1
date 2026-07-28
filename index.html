@@ -481,6 +481,7 @@
         <option value="已投递">已投递</option>
         <option value="待投递">待投递</option>
         <option value="已截止">已截止</option>
+        <option value="已关闭">已关闭</option>
         <option value="不匹配">不匹配</option>
       </select>
     </div>
@@ -735,8 +736,8 @@ function getFilteredJobs() {
   if (filters.tab !== 'all') {
     jobs = jobs.filter(j => j.status === filters.tab);
   } else {
-    // "有效岗位"模式：默认排除"不匹配"
-    jobs = jobs.filter(j => j.status !== '不匹配');
+    // "有效岗位"模式：默认排除"不匹配"和"已关闭"
+    jobs = jobs.filter(j => j.status !== '不匹配' && j.status !== '已关闭');
   }
   if (filters.search) {
     const q = filters.search.toLowerCase();
@@ -785,8 +786,8 @@ function renderJobs() {
   const container = document.getElementById('jobList');
   document.getElementById('resultCount').textContent = `显示 ${jobs.length} 个岗位`;
 
-  // Update stats (exclude mismatched)
-  const activeJobs = JOBS.filter(j => j.status !== '不匹配');
+  // Update stats (exclude mismatched and closed)
+  const activeJobs = JOBS.filter(j => j.status !== '不匹配' && j.status !== '已关闭');
   document.getElementById('statTotal').textContent = activeJobs.length;
   document.getElementById('statMatch').textContent = activeJobs.filter(j => j.match >= 70).length;
   document.getElementById('statOpen').textContent = activeJobs.filter(j => j.status === '可投递').length;
@@ -796,7 +797,7 @@ function renderJobs() {
     const matchClass = getMatchClass(j.match);
     const cardClass = `match-${matchClass}`;
     const deadlineClass = isDeadlineSoon(j.deadline) && j.status === '可投递' ? 'deadline-urgent' : '';
-    const statusColor = j.status === '可投递' ? '#00b894' : j.status === '已投递' ? '#0984e3' : j.status === '已截止' ? '#e17055' : '#636e72';
+    const statusColor = j.status === '可投递' ? '#00b894' : j.status === '已投递' ? '#0984e3' : j.status === '已截止' ? '#e17055' : j.status === '已关闭' ? '#b2bec3' : '#636e72';
     const deadlineLabel = isDeadlineSoon(j.deadline) && j.status === '可投递' ? '⚠️ 即将截止' : '';
 
     return `
@@ -894,6 +895,7 @@ function openDetail(id) {
       <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递');closeModal();">✅ 标记为已投递</button>
       <button class="btn btn-warning" onclick="toggleStatus(${j.id},'待投递');closeModal();">⭐ 加入待投递</button>
       <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 打开投递链接</button>
+      <button class="btn btn-outline" style="color:#b2bec3;border-color:#b2bec3;" onclick="toggleStatus(${j.id},'已关闭');closeModal();">🚫 岗位已关闭</button>
       <button class="btn btn-danger" style="background:#f8c291;color:#c0392b;" onclick="reportBadLink(${j.id});closeModal();">⚠️ 链接与岗位不符</button>
       <button class="btn btn-danger" onclick="toggleStatus(${j.id},'不匹配');closeModal();">❌ 不匹配</button>
     </div>
