@@ -81,13 +81,20 @@ class DedupEngine:
     def is_duplicate(self, job: Dict, existing_jobs: List[Dict], threshold: float = 0.85) -> Optional[Dict]:
         """检查岗位是否重复，返回重复的已有岗位或 None"""
 
-        # Level 1: URL 精确匹配
+        # Level 1: URL 精确匹配（仅当URL包含具体岗位ID时才去重，排除搜索页/首页URL）
         url_fp = self._compute_url_fingerprint(job.get('url', ''))
         if url_fp:
-            for ej in existing_jobs:
-                ej_url_fp = self._compute_url_fingerprint(ej.get('url', ''))
-                if url_fp and ej_url_fp and url_fp == ej_url_fp:
-                    return ej
+            # 跳过通用搜索页URL（如 /zhaopin/ /search/ /list 等），这类URL多个岗位可能共用
+            job_url = job.get('url', '')
+            is_generic_url = any(x in job_url for x in [
+                '/search', '/zhaopin/', '/list', '/city-', '/job/',
+                'iguopin.com/', 'zhipin.com/gongsi/job/', 'liepin.com/company/',
+            ])
+            if not is_generic_url:
+                for ej in existing_jobs:
+                    ej_url_fp = self._compute_url_fingerprint(ej.get('url', ''))
+                    if url_fp and ej_url_fp and url_fp == ej_url_fp:
+                        return ej
 
         # Level 2: 内容指纹匹配
         fp = self._compute_fingerprint(job)
