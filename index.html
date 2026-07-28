@@ -810,7 +810,7 @@ function renderJobs() {
       <div class="job-title">📌 ${j.title} <span style="font-size:10px;color:${j.recruit_type==='社招'?'#00b894':'#0984e3'};background:${j.recruit_type==='社招'?'#d4f7e8':'#dff0ff'};padding:1px 6px;border-radius:8px;vertical-align:middle;">${j.recruit_type||'社招'}</span></div>
       <div class="meta-row">
         <span>💰 ${j.salary}</span>
-        <span>📅 发布：${j._meta?.first_seen || j._meta?.last_updated || j._meta?.last_seen || '--'}</span>
+        <span>📅 ${j._meta?.pub_date ? '发布于' + j._meta.pub_date : '收录于' + (j._meta?.first_seen || '--') + (j._meta?.pub_note ? ' · 以平台为准' : '')}</span>
         <span>⏰ 截止：<span class="${deadlineClass}">${j.deadline || '--'} ${deadlineLabel}</span></span>
         <span>📡 来源：${j.source}</span>
       </div>
@@ -823,6 +823,7 @@ function renderJobs() {
         <button class="btn btn-outline" onclick="toggleStatus(${j.id},'待投递')">⭐ 收藏</button>
         <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递')">✅ 标记已投</button>
         <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 投递链接</button>
+        <button class="btn btn-outline" style="color:#e17055;border-color:#e17055;" onclick="reportBadLink(${j.id})">⚠️ 链接不符</button>
       </div>
     </div>`;
   }).join('');
@@ -888,6 +889,7 @@ function openDetail(id) {
       <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递');closeModal();">✅ 标记为已投递</button>
       <button class="btn btn-warning" onclick="toggleStatus(${j.id},'待投递');closeModal();">⭐ 加入待投递</button>
       <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 打开投递链接</button>
+      <button class="btn btn-danger" style="background:#f8c291;color:#c0392b;" onclick="reportBadLink(${j.id});closeModal();">⚠️ 链接与岗位不符</button>
       <button class="btn btn-danger" onclick="toggleStatus(${j.id},'不匹配');closeModal();">❌ 不匹配</button>
     </div>
   `;
@@ -1123,6 +1125,33 @@ function setupSyncToken() {
 
 function openLink(url) {
   window.open(url, '_blank');
+}
+
+function reportBadLink(id) {
+  const job = JOBS.find(j => j.id === id);
+  if (!job) return;
+  // 记录到 localStorage
+  let badLinks = {};
+  try { badLinks = JSON.parse(localStorage.getItem('bad_links') || '{}'); } catch(e) {}
+  const key = job.company + '|' + job.title + '|' + job.city;
+  badLinks[key] = {
+    company: job.company,
+    title: job.title,
+    city: job.city,
+    url: job.url,
+    source: job.source,
+    reportedAt: new Date().toISOString().slice(0, 10),
+  };
+  localStorage.setItem('bad_links', JSON.stringify(badLinks));
+  // 也标记状态为特殊
+  job.status = '待核实';
+  saveStatusToStorage();
+  renderJobs();
+  alert('已标记：链接与岗位不符。感谢反馈！');
+}
+
+function getBadLinks() {
+  try { return JSON.parse(localStorage.getItem('bad_links') || '{}'); } catch(e) { return {}; }
 }
 
 function exportCSV() {
