@@ -877,7 +877,7 @@ function openDetail(id) {
     <div class="section">
       <h4>📅 关键信息</h4>
       <table style="width:100%;font-size:13px;border-collapse:collapse;">
-        <tr><td style="padding:6px 8px;color:var(--text-secondary);">发布日期</td><td style="padding:6px 8px;font-weight:700;">${j._meta?.first_seen || j._meta?.last_updated || '--'}</td></tr>
+        <tr><td style="padding:6px 8px;color:var(--text-secondary);">${j._meta?.pub_date ? '发布日期' : '收录日期'}</td><td style="padding:6px 8px;font-weight:700;">${j._meta?.pub_date || j._meta?.first_seen || j._meta?.last_updated || '--'}${j._meta?.pub_note ? ' · <span style=\"color:var(--text-secondary);font-weight:400;\">以平台为准</span>' : ''}</td></tr>
         <tr><td style="padding:6px 8px;color:var(--text-secondary);">投递截止</td><td style="padding:6px 8px;font-weight:700;${deadlineSoon?'color:#e17055;':''}">${j.deadline || '--'}</td></tr>
         <tr><td style="padding:6px 8px;color:var(--text-secondary);">招聘来源</td><td style="padding:6px 8px;">${j.source}</td></tr>
         <tr><td style="padding:6px 8px;color:var(--text-secondary);">当前状态</td><td style="padding:6px 8px;font-weight:700;">${j.status} ${j.note ? '('+j.note+')' : ''}</td></tr>
