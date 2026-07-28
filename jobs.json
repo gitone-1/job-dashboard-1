@@ -185,6 +185,38 @@
     }
   },
   {
+    "company": "同程旅行",
+    "type": "internet",
+    "title": "数据运营分析",
+    "city": "苏州",
+    "salary": "20-35K·14薪",
+    "source": "微信公众号(同程招聘)/猎聘",
+    "source_type": "wechat",
+    "url": "https://www.liepin.com/company/3698161/",
+    "tags": [
+      "数据运营",
+      "数据分析",
+      "运营数据分析"
+    ],
+    "desc": "同程旅行苏州招聘数据运营分析岗，负责OTA平台业务数据分析、数据驱动运营决策",
+    "requirements": [
+      "3年以上数据分析经验",
+      "本科及以上学历",
+      "SQL/Python",
+      "OTA背景优先"
+    ],
+    "status": "可投递",
+    "note": "同程招聘公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 93,
+    "id": 7
+  },
+  {
     "company": "上海寰通商务科技",
     "type": "other",
     "title": "数据运营支持",
@@ -205,7 +237,7 @@
     "status": "可投递",
     "note": "猎聘社招",
     "recruit_type": "社招",
-    "id": 7,
+    "id": 8,
     "match": 92,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -238,7 +270,7 @@
     "status": "可投递",
     "note": "猎聘社招·韩资外企",
     "recruit_type": "社招",
-    "id": 8,
+    "id": 9,
     "match": 91,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -268,7 +300,7 @@
     "status": "可投递",
     "note": "猎聘社招·AI/机器人赛道",
     "recruit_type": "社招",
-    "id": 9,
+    "id": 10,
     "match": 91,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -297,7 +329,7 @@
     "status": "可投递",
     "note": "猎聘社招·新能源赛道",
     "recruit_type": "社招",
-    "id": 10,
+    "id": 11,
     "match": 91,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -327,7 +359,7 @@
     "status": "可投递",
     "note": "BOSS直聘·社招",
     "recruit_type": "社招",
-    "id": 11,
+    "id": 12,
     "match": 91,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -359,7 +391,7 @@
     "status": "可投递",
     "note": "猎聘社招·拼多多",
     "recruit_type": "社招",
-    "id": 12,
+    "id": 13,
     "match": 91,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -389,13 +421,73 @@
     "status": "可投递",
     "note": "猎聘社招·比亚迪",
     "recruit_type": "社招",
-    "id": 13,
+    "id": 14,
     "match": 91,
     "_meta": {
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
       "last_updated": "2026-07-27"
     }
+  },
+  {
+    "company": "杭州市数据集团",
+    "type": "state",
+    "title": "数据运营岗",
+    "city": "杭州",
+    "salary": "面议",
+    "source": "微信公众号(杭州本地宝)/杭州本地宝官网",
+    "source_type": "wechat",
+    "url": "https://m.hz.bendibao.com/job/130917.shtm",
+    "tags": [
+      "数据运营",
+      "数据分析"
+    ],
+    "desc": "杭州市数据集团有限公司下属企业招聘工作人员15人（社招·招满为止），负责数据运营、政务数据分析",
+    "requirements": [
+      "本科及以上学历",
+      "数据分析能力"
+    ],
+    "status": "可投递",
+    "note": "杭州本地宝公众号·国企社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 91,
+    "id": 15
+  },
+  {
+    "company": "华为",
+    "type": "internet",
+    "title": "数据运营工程师",
+    "city": "杭州",
+    "salary": "25-45K·14薪",
+    "source": "微信公众号(华为招聘)/华为招聘���网",
+    "source_type": "wechat",
+    "url": "https://career.huawei.com/reccampportal/portal5/social-recruitment.html",
+    "tags": [
+      "数据运营",
+      "数据分析"
+    ],
+    "desc": "华为杭州研究所招聘数据运营工程师，负责数据平台运营、数据治理、数据质量监控",
+    "requirements": [
+      "本科及以上学历",
+      "数据运营经验",
+      "Python/SQL",
+      "大数据技术栈"
+    ],
+    "status": "可投递",
+    "note": "华为招聘公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 91,
+    "id": 16
   },
   {
     "company": "同程旅行",
@@ -421,7 +513,7 @@
     "status": "可投递",
     "note": "猎聘社招·同程旅行(已上市)",
     "recruit_type": "社招",
-    "id": 14,
+    "id": 17,
     "match": 90,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -450,7 +542,7 @@
     "status": "可投递",
     "note": "猎聘社招·适合初级",
     "recruit_type": "社招",
-    "id": 15,
+    "id": 18,
     "match": 89,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -481,7 +573,7 @@
     "status": "可投递",
     "note": "猎聘社招·三六五网(已上市)",
     "recruit_type": "社招",
-    "id": 16,
+    "id": 19,
     "match": 86,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -513,7 +605,7 @@
     "status": "可投递",
     "note": "猎聘社招·携程(已上市)",
     "recruit_type": "社招",
-    "id": 17,
+    "id": 20,
     "match": 84,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -545,13 +637,75 @@
     "status": "可投递",
     "note": "央企控股·社招",
     "recruit_type": "社招",
-    "id": 18,
+    "id": 21,
     "match": 82,
     "_meta": {
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
       "last_updated": "2026-07-27"
     }
+  },
+  {
+    "company": "海康威视",
+    "type": "state",
+    "title": "运营数据分析师",
+    "city": "杭州",
+    "salary": "20-35K",
+    "source": "微信公众号(海康威视招聘)/BOSS直聘",
+    "source_type": "wechat",
+    "url": "https://www.zhipin.com/job_detail/5cdc2a393a8081511XZ509q7EVRU.html",
+    "tags": [
+      "数据分析",
+      "运营数据分析",
+      "数据运营"
+    ],
+    "desc": "海康威视杭州招聘运营数据分析师，负责业务运营数据分析、数据看板搭建",
+    "requirements": [
+      "本科及以上学历",
+      "数据分析经验",
+      "SQL/Python/Tableau"
+    ],
+    "status": "可投递",
+    "note": "海康威视招聘公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 81,
+    "id": 22
+  },
+  {
+    "company": "淘天集团",
+    "type": "internet",
+    "title": "策略运营",
+    "city": "杭州",
+    "salary": "25-40K·16薪",
+    "source": "微信公众号(阿里巴巴招聘)/猎聘",
+    "source_type": "wechat",
+    "url": "https://www.nowcoder.com/jobs/detail/345668",
+    "tags": [
+      "策略运营",
+      "数据分析",
+      "电商运营"
+    ],
+    "desc": "淘天集团(阿里巴巴)杭州招聘策略运营，负责电商平台策略运营、业务数据分析",
+    "requirements": [
+      "3年以上策略运营经验",
+      "本科及以上学历",
+      "电商背景优先"
+    ],
+    "status": "可投递",
+    "note": "阿里巴巴招聘公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 80,
+    "id": 23
   },
   {
     "company": "叮咚买菜",
@@ -577,7 +731,7 @@
     "status": "可投递",
     "note": "猎聘社招·叮咚买菜(已上市)",
     "recruit_type": "社招",
-    "id": 19,
+    "id": 24,
     "match": 77,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -608,7 +762,7 @@
     "status": "可投递",
     "note": "国企·社招",
     "recruit_type": "社招",
-    "id": 20,
+    "id": 25,
     "match": 71,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -638,13 +792,43 @@
     "status": "可投递",
     "note": "猎聘社招·爱回收(已上市)",
     "recruit_type": "社招",
-    "id": 21,
+    "id": 26,
     "match": 71,
     "_meta": {
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
       "last_updated": "2026-07-27"
     }
+  },
+  {
+    "company": "上海东方枢纽投资建设发展集团",
+    "type": "state",
+    "title": "规划管理岗",
+    "city": "上海",
+    "salary": "面议",
+    "deadline": "2026-10-14",
+    "source": "微信公众号(国资小新/国聘)",
+    "source_type": "wechat",
+    "url": "https://www.iguopin.com/",
+    "tags": [
+      "数据运营",
+      "数字化运营"
+    ],
+    "desc": "上海东方枢纽投资建设发展集团招聘规划管理岗（社招·硕士），负责区域发展规划、数据分析",
+    "requirements": [
+      "硕士及以上学历",
+      "规划/数据相关专业"
+    ],
+    "status": "可投递",
+    "note": "国资小新公众号·截止2026-10-14",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 71,
+    "id": 27
   },
   {
     "company": "哔哩哔哩",
@@ -670,7 +854,7 @@
     "status": "可投递",
     "note": "猎聘社招·B站(已上市)",
     "recruit_type": "社招",
-    "id": 22,
+    "id": 28,
     "match": 68,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -701,13 +885,43 @@
     "status": "可投递",
     "note": "国企·社招",
     "recruit_type": "社招",
-    "id": 23,
+    "id": 29,
     "match": 67,
     "_meta": {
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
       "last_updated": "2026-07-27"
     }
+  },
+  {
+    "company": "博世",
+    "type": "foreign",
+    "title": "工业IOT数据分析工程师",
+    "city": "苏州",
+    "salary": "20-35K",
+    "source": "微信公众号(博世中国人才苑)/BOSS直聘",
+    "source_type": "wechat",
+    "url": "https://www.zhipin.com/gongsi/job/f8bf90851f6e4cd31nd43NW1EFU~.html",
+    "tags": [
+      "数据分析",
+      "数字化运营"
+    ],
+    "desc": "博世苏州招聘工业IOT数据分析工程师，负责工业物联网数据采集分析、数据平台建设、智能制造数字化运营",
+    "requirements": [
+      "本科及以上学历",
+      "Python/SQL",
+      "IOT背景优先"
+    ],
+    "status": "可投递",
+    "note": "博世中国人才苑公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 67,
+    "id": 30
   },
   {
     "company": "敏实集团",
@@ -732,13 +946,43 @@
     "status": "可投递",
     "note": "猎聘社招·外企",
     "recruit_type": "社招",
-    "id": 24,
+    "id": 31,
     "match": 57,
     "_meta": {
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
       "last_updated": "2026-07-27"
     }
+  },
+  {
+    "company": "卡特彼勒",
+    "type": "foreign",
+    "title": "数字化运营专员",
+    "city": "苏州",
+    "salary": "15-25K",
+    "source": "微信公众号(卡特彼勒招聘)",
+    "source_type": "wechat",
+    "url": "https://www.caterpillar.com/zh/careers.html",
+    "tags": [
+      "数字化运营",
+      "数据分析"
+    ],
+    "desc": "卡特彼勒苏州招聘数字化运营专员，负责制造数字化运营、生产数据分析、运营效率优化",
+    "requirements": [
+      "本科及以上学历",
+      "数字化运营经验",
+      "制造业背景"
+    ],
+    "status": "可投递",
+    "note": "卡特彼勒招聘公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 57,
+    "id": 32
   },
   {
     "company": "京东",
@@ -763,7 +1007,7 @@
     "status": "可投递",
     "note": "猎聘社招·京东",
     "recruit_type": "社招",
-    "id": 25,
+    "id": 33,
     "match": 53,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -794,7 +1038,7 @@
     "status": "可投递",
     "note": "猎聘社招·雅迪科技(已上市)",
     "recruit_type": "社招",
-    "id": 26,
+    "id": 34,
     "match": 53,
     "_meta": {
       "first_seen": "2026-07-27",
@@ -824,12 +1068,159 @@
     "status": "可投递",
     "note": "猎聘社招·数字化服务",
     "recruit_type": "社招",
-    "id": 27,
+    "id": 35,
     "match": 53,
     "_meta": {
       "first_seen": "2026-07-27",
       "last_seen": "2026-07-27",
       "last_updated": "2026-07-27"
     }
+  },
+  {
+    "company": "博世",
+    "type": "foreign",
+    "title": "高级智驾大数据工程师",
+    "city": "苏州",
+    "salary": "30-50K",
+    "source": "微信公众号(博世中国人才苑)/职友集",
+    "source_type": "wechat",
+    "url": "https://m.jobui.com/job/339336282/",
+    "tags": [
+      "数据分析",
+      "大数据"
+    ],
+    "desc": "博世苏州招聘高级智驾大数据工程师，负责智能驾驶大数据平台建设、数据挖掘分析",
+    "requirements": [
+      "3-5年大数据经验",
+      "本科及以上学历",
+      "智驾/汽车行业背景"
+    ],
+    "status": "可投递",
+    "note": "博世中国人才苑公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 48,
+    "id": 36
+  },
+  {
+    "company": "博世",
+    "type": "foreign",
+    "title": "数据标注/AI训练师",
+    "city": "苏州",
+    "salary": "15-25K",
+    "source": "微信公众号(博世中国人才苑)/BOSS直聘",
+    "source_type": "wechat",
+    "url": "https://www.zhipin.com/gongsi/job/f8bf90851f6e4cd31nd43NW1EFU~.html",
+    "tags": [
+      "数据运营",
+      "AI"
+    ],
+    "desc": "博世苏州招聘数据标注/AI训练师，负责AI训练数据标注、数据质量管理",
+    "requirements": [
+      "本科及以上学历",
+      "数据标注经验"
+    ],
+    "status": "可投递",
+    "note": "博世中国人才苑公众号·社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 47,
+    "id": 37
+  },
+  {
+    "company": "西门子",
+    "type": "foreign",
+    "title": "高级数字化转型工程师",
+    "city": "苏州",
+    "salary": "25-40K",
+    "source": "微信公众号(西门子招聘)/西门子中国官网",
+    "source_type": "wechat",
+    "url": "https://jobs.siemens.com.cn/siemens/position/index?city=%E8%8B%8F%E5%B7%9E",
+    "tags": [
+      "数字化运营",
+      "数据分析"
+    ],
+    "desc": "西门子苏州招聘高级数字化转型工程师（系统开发方向），负责制造数字化系统开发、工业数据分析",
+    "requirements": [
+      "本科及以上学历",
+      "数字化转型经验",
+      "制造业背景"
+    ],
+    "status": "可投递",
+    "note": "西门子招聘公众号·2026-07-24发布",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 47,
+    "id": 38
+  },
+  {
+    "company": "中国人民人寿保险",
+    "type": "state",
+    "title": "健康养老规划师",
+    "city": "苏州",
+    "salary": "面议",
+    "deadline": "2026-10-14",
+    "source": "微信公众号(国资小新/国聘)",
+    "source_type": "wechat",
+    "url": "https://www.iguopin.com/",
+    "tags": [
+      "客户运营",
+      "数据分析"
+    ],
+    "desc": "中国人民人寿保险苏州中心支公司招聘健康养老规划师（社招·大专可报）",
+    "requirements": [
+      "大专及以上学历"
+    ],
+    "status": "可投递",
+    "note": "国资小新公众号·截止2026-10-14",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 47,
+    "id": 39
+  },
+  {
+    "company": "浙江浙大科创集团",
+    "type": "state",
+    "title": "科创运营岗",
+    "city": "杭州",
+    "salary": "面议",
+    "source": "微信公众号(杭州本地宝)/杭州本地宝官网",
+    "source_type": "wechat",
+    "url": "https://m.hz.bendibao.com/job/130917.shtm",
+    "tags": [
+      "平台运营",
+      "数字化运营"
+    ],
+    "desc": "浙江浙大科创集团有限公司招聘工作人员12人（社招·招满为止），负责科创平台运营",
+    "requirements": [
+      "本科及以上学历",
+      "科创/运营相关经验"
+    ],
+    "status": "可投递",
+    "note": "杭州本地宝公众号·国企社招",
+    "recruit_type": "社招",
+    "_meta": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "last_updated": "2026-07-28"
+    },
+    "match": 29,
+    "id": 40
   }
 ]
