@@ -528,11 +528,12 @@
 
     <!-- Status Tabs -->
     <div class="status-tabs" id="statusTabs">
-      <span class="status-tab active" data-tab="all">📋 全部</span>
+      <span class="status-tab active" data-tab="all">📋 有效岗位</span>
       <span class="status-tab" data-tab="可投递">✅ 可投递</span>
       <span class="status-tab" data-tab="已投递">📤 已投递</span>
       <span class="status-tab" data-tab="待投递">⭐ 待投递</span>
       <span class="status-tab" data-tab="已截止">⛔ 已截止</span>
+      <span class="status-tab" data-tab="不匹配" style="opacity:0.6;">🚫 不匹配</span>
     </div>
 
     <!-- Toolbar -->
@@ -544,7 +545,6 @@
         <option value="company">按公司名 ↑</option>
       </select>
       <button class="btn btn-outline" onclick="exportCSV()">📥 导出CSV</button>
-      <button class="btn btn-outline" onclick="clearMismatched()" style="color:#e17055;border-color:#e17055;" title="永久删除所有标记为「不匹配」的岗位">🗑️ 清除不匹配</button>
     </div>
 
     <div class="result-count" id="resultCount">显示 24 个岗位</div>
@@ -734,6 +734,9 @@ function getFilteredJobs() {
   if (filters.status !== 'all') jobs = jobs.filter(j => j.status === filters.status);
   if (filters.tab !== 'all') {
     jobs = jobs.filter(j => j.status === filters.tab);
+  } else {
+    // "有效岗位"模式：默认排除"不匹配"
+    jobs = jobs.filter(j => j.status !== '不匹配');
   }
   if (filters.search) {
     const q = filters.search.toLowerCase();
@@ -782,11 +785,12 @@ function renderJobs() {
   const container = document.getElementById('jobList');
   document.getElementById('resultCount').textContent = `显示 ${jobs.length} 个岗位`;
 
-  // Update stats
-  document.getElementById('statTotal').textContent = JOBS.length;
-  document.getElementById('statMatch').textContent = JOBS.filter(j => j.match >= 70).length;
-  document.getElementById('statOpen').textContent = JOBS.filter(j => j.status === '可投递').length;
-  document.getElementById('statDeadline').textContent = JOBS.filter(j => isDeadlineSoon(j.deadline) && j.status === '可投递').length;
+  // Update stats (exclude mismatched)
+  const activeJobs = JOBS.filter(j => j.status !== '不匹配');
+  document.getElementById('statTotal').textContent = activeJobs.length;
+  document.getElementById('statMatch').textContent = activeJobs.filter(j => j.match >= 70).length;
+  document.getElementById('statOpen').textContent = activeJobs.filter(j => j.status === '可投递').length;
+  document.getElementById('statDeadline').textContent = activeJobs.filter(j => isDeadlineSoon(j.deadline) && j.status === '可投递').length;
 
   container.innerHTML = jobs.map(j => {
     const matchClass = getMatchClass(j.match);
@@ -960,36 +964,6 @@ function toggleStatus(id, newStatus) {
     if (GITHUB_TOKEN) syncStatusToGithub();
     renderJobs();
   }
-}
-
-// ═══════════════════════════════════════
-//  清除不匹配岗位
-// ═══════════════════════════════════════
-function clearMismatched() {
-  const mismatched = JOBS.filter(j => j.status === '不匹配');
-  if (mismatched.length === 0) {
-    alert('当前没有标记为「不匹配」的岗位');
-    return;
-  }
-  const names = mismatched.map(j => `${j.company} - ${j.title}`).join('\n');
-  if (!confirm(`确认永久删除以下 ${mismatched.length} 个岗位？\n\n${names}\n\n删除后不可恢复，但下次数据更新时可能重新出现。`)) return;
-  
-  // Remove from JOBS array
-  for (let i = JOBS.length - 1; i >= 0; i--) {
-    if (JOBS[i].status === '不匹配') {
-      JOBS.splice(i, 1);
-    }
-  }
-  // Also clear from localStorage status map
-  const statusMap = JSON.parse(localStorage.getItem('job_status') || '{}');
-  for (const key in statusMap) {
-    if (statusMap[key] === '不匹配' || (typeof statusMap[key] === 'object' && statusMap[key].status === '不匹配')) {
-      delete statusMap[key];
-    }
-  }
-  localStorage.setItem('job_status', JSON.stringify(statusMap));
-  if (GITHUB_TOKEN) syncStatusToGithub();
-  renderJobs();
 }
 
 // ═══════════════════════════════════════
