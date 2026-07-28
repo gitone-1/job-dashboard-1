@@ -1107,35 +1107,6 @@
     "id": 36
   },
   {
-    "company": "博世",
-    "type": "foreign",
-    "title": "数据标注/AI训练师",
-    "city": "苏州",
-    "salary": "15-25K",
-    "source": "微信公众号(博世中国人才苑)/BOSS直聘",
-    "source_type": "wechat",
-    "url": "https://www.zhipin.com/gongsi/job/f8bf90851f6e4cd31nd43NW1EFU~.html",
-    "tags": [
-      "数据运营",
-      "AI"
-    ],
-    "desc": "博世苏州招聘数据标注/AI训练师，负责AI训练数据标注、数据质量管理",
-    "requirements": [
-      "本科及以上学历",
-      "数据标注经验"
-    ],
-    "status": "可投递",
-    "note": "博世中国人才苑公众号·社招",
-    "recruit_type": "社招",
-    "_meta": {
-      "first_seen": "2026-07-28",
-      "last_seen": "2026-07-28",
-      "last_updated": "2026-07-28"
-    },
-    "match": 47,
-    "id": 37
-  },
-  {
     "company": "西门子",
     "type": "foreign",
     "title": "高级数字化转型工程师",
@@ -1163,7 +1134,7 @@
       "last_updated": "2026-07-28"
     },
     "match": 47,
-    "id": 38
+    "id": 37
   },
   {
     "company": "中国人民人寿保险",
@@ -1192,7 +1163,7 @@
       "last_updated": "2026-07-28"
     },
     "match": 47,
-    "id": 39
+    "id": 38
   },
   {
     "company": "浙江浙大科创集团",
@@ -1221,6 +1192,6 @@
       "last_updated": "2026-07-28"
     },
     "match": 29,
-    "id": 40
+    "id": 39
   }
 ]
