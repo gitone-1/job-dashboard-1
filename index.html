@@ -895,7 +895,7 @@ function openDetail(id) {
       <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递');closeModal();">✅ 标记为已投递</button>
       <button class="btn btn-warning" onclick="toggleStatus(${j.id},'待投递');closeModal();">⭐ 加入待投递</button>
       <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 打开投递链接</button>
-      <button class="btn btn-outline" style="color:#b2bec3;border-color:#b2bec3;" onclick="toggleStatus(${j.id},'已关闭');closeModal();">🚫 岗位已关闭</button>
+      <button class="btn btn-outline" style="color:#e17055;border-color:#e17055;" onclick="toggleStatus(${j.id},'已关闭');closeModal();">🚫 岗位已关闭</button>
       <button class="btn btn-danger" style="background:#f8c291;color:#c0392b;" onclick="reportBadLink(${j.id});closeModal();">⚠️ 链接与岗位不符</button>
       <button class="btn btn-danger" onclick="toggleStatus(${j.id},'不匹配');closeModal();">❌ 不匹配</button>
     </div>
