@@ -544,6 +544,7 @@
         <option value="company">按公司名 ↑</option>
       </select>
       <button class="btn btn-outline" onclick="exportCSV()">📥 导出CSV</button>
+      <button class="btn btn-outline" onclick="clearMismatched()" style="color:#e17055;border-color:#e17055;" title="永久删除所有标记为「不匹配」的岗位">🗑️ 清除不匹配</button>
     </div>
 
     <div class="result-count" id="resultCount">显示 24 个岗位</div>
@@ -959,6 +960,36 @@ function toggleStatus(id, newStatus) {
     if (GITHUB_TOKEN) syncStatusToGithub();
     renderJobs();
   }
+}
+
+// ═══════════════════════════════════════
+//  清除不匹配岗位
+// ═══════════════════════════════════════
+function clearMismatched() {
+  const mismatched = JOBS.filter(j => j.status === '不匹配');
+  if (mismatched.length === 0) {
+    alert('当前没有标记为「不匹配」的岗位');
+    return;
+  }
+  const names = mismatched.map(j => `${j.company} - ${j.title}`).join('\n');
+  if (!confirm(`确认永久删除以下 ${mismatched.length} 个岗位？\n\n${names}\n\n删除后不可恢复，但下次数据更新时可能重新出现。`)) return;
+  
+  // Remove from JOBS array
+  for (let i = JOBS.length - 1; i >= 0; i--) {
+    if (JOBS[i].status === '不匹配') {
+      JOBS.splice(i, 1);
+    }
+  }
+  // Also clear from localStorage status map
+  const statusMap = JSON.parse(localStorage.getItem('job_status') || '{}');
+  for (const key in statusMap) {
+    if (statusMap[key] === '不匹配' || (typeof statusMap[key] === 'object' && statusMap[key].status === '不匹配')) {
+      delete statusMap[key];
+    }
+  }
+  localStorage.setItem('job_status', JSON.stringify(statusMap));
+  if (GITHUB_TOKEN) syncStatusToGithub();
+  renderJobs();
 }
 
 // ═══════════════════════════════════════
