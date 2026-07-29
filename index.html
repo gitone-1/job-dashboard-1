@@ -621,11 +621,10 @@ async function loadResumeProfile() {
 }
 
 async function loadJobsData() {
-  // DATA_VERSION 每次更新数据时递增，强制浏览器加载新版本
-  const DATA_VERSION = '20260729v3';
+  // 使用独立文件名彻底避免浏览器缓存
   const sources = [
-    { url: 'https://gitone-1.github.io/job-dashboard-1/jobs.json?v=' + DATA_VERSION, label: 'GitHub Pages(最新)' },
-    { url: './jobs.json?v=' + DATA_VERSION, label: '本地数据' },
+    { url: 'https://gitone-1.github.io/job-dashboard-1/jobs_v2.json', label: 'GitHub Pages(最新)' },
+    { url: './jobs_v2.json', label: '本地数据' },
   ];
 
   for (const src of sources) {
@@ -744,11 +743,14 @@ function getFilteredJobs() {
   }
   if (filters.city !== 'all') jobs = jobs.filter(j => j.city === filters.city);
   if (filters.matchMin > 0) jobs = jobs.filter(j => j.match >= filters.matchMin);
-  if (filters.status !== 'all') jobs = jobs.filter(j => j.status === filters.status);
+  
+  // Tab 筛选（与 status 下拉框互斥，tab 优先级更高）
   if (filters.tab !== 'all') {
     jobs = jobs.filter(j => j.status === filters.tab);
+  } else if (filters.status !== 'all') {
+    jobs = jobs.filter(j => j.status === filters.status);
   } else {
-    // "有效岗位"模式：默认排除"不匹配"、"已关闭"和"已投递"
+    // 默认"有效岗位"：排除不匹配、已关闭、已投递
     jobs = jobs.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递');
   }
   if (filters.search) {
@@ -1053,7 +1055,8 @@ async function restoreStatusFromStorage() {
 
 async function fetchStatusFromRemote() {
   try {
-    const resp = await fetch(STATUS_FILE);
+    // 加时间戳避免缓存
+    const resp = await fetch(STATUS_FILE + '?t=' + Date.now());
     if (resp.ok) {
       return await resp.json();
     }
