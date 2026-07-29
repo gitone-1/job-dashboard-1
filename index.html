@@ -969,7 +969,8 @@ function closeModal(e) {
 function toggleStatus(id, newStatus) {
   const job = JOBS.find(j => j.id === id);
   if (job) {
-    if (job.status === '已截止' && newStatus !== '已截止') {
+    // 已截止岗位允许标记为「不匹配」或「已关闭」，但不允许改回可投递等状态
+    if (job.status === '已截止' && newStatus !== '不匹配' && newStatus !== '已关闭') {
       alert('该岗位已截止，无法更改状态');
       return;
     }
@@ -1034,23 +1035,30 @@ function saveStatusToStorage() {
 }
 
 async function restoreStatusFromStorage() {
-  // 先尝试从 GitHub 远程加载（跨设备同步）
+  let restored = false;
+  
+  // 1. 先用本地 localStorage（最快，不受网络影响）
+  try {
+    const saved = localStorage.getItem('job_dashboard_status');
+    if (saved) {
+      applyStatusMap(JSON.parse(saved), '本地存储');
+      restored = true;
+    }
+  } catch(e) {}
+  
+  // 2. 再用远程 GitHub 数据覆盖（确保是最新同步的）
   try {
     const remoteStatus = await fetchStatusFromRemote();
     if (remoteStatus && Object.keys(remoteStatus).length > 0) {
       applyStatusMap(remoteStatus, '远程(GitHub)');
       try { localStorage.setItem('job_dashboard_status', JSON.stringify(remoteStatus)); } catch(e) {}
-      return;
+      restored = true;
     }
-  } catch(e) {}
-
-  // 远程没有或失败，用本地
-  try {
-    const saved = localStorage.getItem('job_dashboard_status');
-    if (saved) {
-      applyStatusMap(JSON.parse(saved), '本地存储');
-    }
-  } catch(e) {}
+  } catch(e) {
+    console.warn('远程状态加载失败，使用本地数据');
+  }
+  
+  if (!restored) console.log('无已保存的状态');
 }
 
 async function fetchStatusFromRemote() {
