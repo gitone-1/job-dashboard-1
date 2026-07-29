@@ -549,6 +549,7 @@
         <option value="company">按公司名 ↑</option>
       </select>
       <button class="btn btn-outline" onclick="exportCSV()">📥 导出CSV</button>
+      <button class="btn btn-outline" id="btnSyncStatus" onclick="manualSyncStatus()" style="display:none;">☁️ 同步状态到云端</button>
     </div>
 
     <div class="result-count" id="resultCount">显示 24 个岗位</div>
@@ -666,6 +667,12 @@ async function initApp() {
   await restoreStatusFromStorage();  // 等待状态恢复完成
   updateTimeBadge();
   renderJobs();
+  
+  // 如果有 token，显示同步按钮
+  if (GITHUB_TOKEN) {
+    const btn = document.getElementById('btnSyncStatus');
+    if (btn) btn.style.display = '';
+  }
 }
 
 // ═══════════════════════════════════════
@@ -965,11 +972,42 @@ function toggleStatus(id, newStatus) {
       return;
     }
     job.status = newStatus;
-    // 持久化
+    // 持久化到本地
     saveStatusToStorage();
-    // 如果有 token，同步到 GitHub
-    if (GITHUB_TOKEN) syncStatusToGithub();
+    // 自动尝试同步到 GitHub
+    autoSyncToGithub();
     renderJobs();
+  }
+}
+
+// 自动云同步（不阻塞UI，失败也不报错）
+let _syncTimer = null;
+function autoSyncToGithub() {
+  if (!GITHUB_TOKEN) return;
+  // 防抖：1秒内的多次操作只同步一次
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(() => {
+    syncStatusToGithub().then(ok => {
+      if (ok) {
+        const btn = document.getElementById('btnSyncStatus');
+        if (btn) { btn.textContent = '✅ 已同步'; btn.style.display = ''; setTimeout(() => { btn.textContent = '☁️ 同步状态到云端'; }, 2000); }
+      }
+    });
+  }, 1000);
+}
+
+// 手动同步按钮
+async function manualSyncStatus() {
+  const btn = document.getElementById('btnSyncStatus');
+  btn.textContent = '⏳ 同步中...';
+  btn.disabled = true;
+  const ok = await syncStatusToGithub();
+  if (ok) {
+    btn.textContent = '✅ 同步成功';
+    setTimeout(() => { btn.textContent = '☁️ 同步状态到云端'; btn.disabled = false; }, 2000);
+  } else {
+    btn.textContent = '❌ 同步失败，请检查Token';
+    setTimeout(() => { btn.textContent = '☁️ 同步状态到云端'; btn.disabled = false; }, 3000);
   }
 }
 
