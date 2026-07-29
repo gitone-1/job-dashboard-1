@@ -618,13 +618,15 @@ async function loadResumeProfile() {
 
 async function loadJobsData() {
   const sources = [
-    { url: './jobs.json', label: '本地数据' },
     { url: 'https://gitone-1.github.io/job-dashboard-1/jobs.json', label: 'GitHub Pages(最新)' },
+    { url: './jobs.json', label: '本地数据' },
   ];
 
   for (const src of sources) {
     try {
-      const resp = await fetch(src.url);
+      // 加缓存破坏参数，避免浏览器缓存旧数据
+      const fetchUrl = src.url + (src.url.includes('?') ? '&' : '?') + '_t=' + Date.now();
+      const resp = await fetch(fetchUrl);
       if (resp.ok) {
         const data = await resp.json();
         if (Array.isArray(data) && data.length > 0) {
