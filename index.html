@@ -1062,14 +1062,41 @@ async function restoreStatusFromStorage() {
 }
 
 async function fetchStatusFromRemote() {
+  // 加时间戳避免缓存
+  const url = STATUS_FILE + '?t=' + Date.now();
+  
+  // 优先用 fetch
   try {
-    // 加时间戳避免缓存
-    const resp = await fetch(STATUS_FILE + '?t=' + Date.now());
+    const resp = await fetch(url);
     if (resp.ok) {
       return await resp.json();
     }
-  } catch(e) {}
+  } catch(e) {
+    console.warn('fetch状态失败，尝试XHR');
+  }
+  
+  // IE fallback: XMLHttpRequest
+  try {
+    return await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            try { resolve(JSON.parse(xhr.responseText)); } catch(e) { reject(e); }
+          } else {
+            reject(new Error('HTTP ' + xhr.status));
+          }
+        }
+      };
+      xhr.send();
+    });
+  } catch(e) {
+    console.warn('XHR状态加载失败');
+  }
+  
   return null;
+}
 }
 
 function applyStatusMap(statusMap, source) {
