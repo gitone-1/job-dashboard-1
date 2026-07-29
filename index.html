@@ -559,6 +559,12 @@
   </main>
 </div>
 
+<!-- IE 浏览器提示 -->
+<div id="ieNotice" style="display:none; background:#fff3cd; color:#856404; padding:10px 16px; font-size:13px; text-align:center; border-bottom:1px solid #ffeaa7;">
+  ⚠️ 检测到您使用 IE 浏览器，部分功能可能异常。建议使用 <b>Edge</b> 或 <b>Chrome</b> 打开，或用此链接强制刷新：
+  <a href="https://gitone-1.github.io/job-dashboard-1/index.html?v=20260730" style="color:#0984e3; font-weight:700;">点此打开最新版</a>
+</div>
+
 <!-- Job Detail Modal -->
 <div class="modal-overlay" id="modalOverlay" style="display:none" onclick="closeModal(event)">
   <div class="modal" id="modalContent"></div>
@@ -659,6 +665,12 @@ async function loadJobsData() {
 }
 
 async function initApp() {
+  // IE 浏览器检测提示
+  if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident/') !== -1) {
+    const notice = document.getElementById('ieNotice');
+    if (notice) notice.style.display = 'block';
+  }
+
   // 从 localStorage 读取已保存的 token
   GITHUB_TOKEN = localStorage.getItem('gh_sync_token') || '';
   await loadResumeProfile();

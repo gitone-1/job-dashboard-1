@@ -200,6 +200,11 @@ def run_pipeline(source_filter: str = None, dry_run: bool = False):
         save_json('jobs.json', merged_jobs)
         logger.info(f"✅ jobs.json 已更新: {len(merged_jobs)} 条岗位")
 
+        # 12.6 写入版本化数据文件（避免 IE 缓存旧 jobs.json）
+        versioned_name = f'jobs_v{int(time.time())}.json'
+        save_json(versioned_name, merged_jobs)
+        update_index_data_ref(versioned_name, logger)
+
         # 存档原始数据
         archive_raw_data(raw_jobs)
 
@@ -221,6 +226,21 @@ def update_time_file(date_str: str):
     """更新最后更新时间文件"""
     with open('data/last_update.txt', 'w') as f:
         f.write(date_str)
+
+
+def update_index_data_ref(versioned_name: str, logger=None):
+    """更新 index.html 中引用的数据文件名，避免 IE 缓存"""
+    import re
+    index_path = Path('index.html')
+    if not index_path.exists():
+        return
+    html = index_path.read_text(encoding='utf-8')
+    # 替换 jobs_v*.json 引用
+    new_html = re.sub(r"jobs_v\d+\.json", versioned_name, html)
+    if new_html != html:
+        index_path.write_text(new_html, encoding='utf-8')
+        if logger:
+            logger.info(f"✅ 更新 index.html 数据引用: {versioned_name}")
 
 
 def restore_user_status(merged_jobs: List[Dict], logger=None):
