@@ -194,5 +194,6 @@ class DedupEngine:
             if last_seen and last_seen < cutoff and job.get('status') == '可投递':
                 job['status'] = '已截止'
                 job['note'] = job.get('note', '') + ' [已过期]'
+            # 已标记不匹配/已关闭/已投递的岗位不会被重置
 
         return jobs

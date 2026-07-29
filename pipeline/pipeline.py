@@ -194,6 +194,9 @@ def run_pipeline(source_filter: str = None, dry_run: bool = False):
         for j in merged_jobs[:5]:
             logger.info(f"  [{j.get('match', 0)}%] {j.get('company')} - {j.get('title')} ({j.get('city')})")
     else:
+        # 12.5 恢复用户状态（不匹配/已投递/已关闭等），避免更新后重复出现
+        restore_user_status(merged_jobs, logger)
+
         save_json('jobs.json', merged_jobs)
         logger.info(f"✅ jobs.json 已更新: {len(merged_jobs)} 条岗位")
 
@@ -218,6 +221,50 @@ def update_time_file(date_str: str):
     """更新最后更新时间文件"""
     with open('data/last_update.txt', 'w') as f:
         f.write(date_str)
+
+
+def restore_user_status(merged_jobs: List[Dict], logger=None):
+    """
+    更新数据后，从 user_status.json 恢复用户标注的状态（不匹配/已投递/已关闭/已截止）
+    避免已标记不匹配的岗位在下次更新时重复出现
+    """
+    # 读 user_status.json（本地优先，远程补充）
+    status_map = load_json('user_status.json') or {}
+
+    # 尝试从 GitHub Pages 读取（用户可能在其他设备同步过）
+    try:
+        import urllib.request
+        resp = urllib.request.urlopen('https://gitone-1.github.io/job-dashboard-1/user_status.json?t=' + str(int(time.time())))
+        remote_status = json.loads(resp.read())
+        # 合并：远程有但本地没有的，加上
+        for k, v in remote_status.items():
+            if k not in status_map:
+                status_map[k] = v
+    except Exception as e:
+        if logger: logger.warning(f"读取远程用户状态失败(使用本地): {e}")
+
+    if not status_map:
+        return
+
+    # 建立 key -> job 索引
+    key_to_job = {}
+    for j in merged_jobs:
+        key = j.get('_meta', {}).get('fingerprint', '') or (j['company'] + '|' + j['title'] + '|' + j['city'])
+        key_to_job[key] = j
+
+    restored = 0
+    for key, val in status_map.items():
+        if key in key_to_job:
+            st = val if isinstance(val, str) else val.get('status')
+            if st and st != '可投递':
+                # 不改回可投递（已截止保持已截止）
+                if st == '不匹配' or st == '已关闭' or st == '已投递':
+                    key_to_job[key]['status'] = st
+                    restored += 1
+
+    if logger:
+        logger.info(f"✅ 恢复用户状态: {restored} 条 (不匹配/已关闭/已投递)")
+
 
 
 def main():
