@@ -750,8 +750,8 @@ function getFilteredJobs() {
   } else if (filters.status !== 'all') {
     jobs = jobs.filter(j => j.status === filters.status);
   } else {
-    // 默认"有效岗位"：排除不匹配、已关闭、已投递
-    jobs = jobs.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递');
+    // 默认"有效岗位"：排除不匹配、已关闭、已投递、已截止
+    jobs = jobs.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递' && j.status !== '已截止');
   }
   if (filters.search) {
     const q = filters.search.toLowerCase();
@@ -801,7 +801,7 @@ function renderJobs() {
   document.getElementById('resultCount').textContent = `显示 ${jobs.length} 个岗位`;
 
   // Update stats (exclude mismatched, closed and applied)
-  const activeJobs = JOBS.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递');
+  const activeJobs = JOBS.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递' && j.status !== '已截止');
   document.getElementById('statTotal').textContent = activeJobs.length;
   document.getElementById('statMatch').textContent = activeJobs.filter(j => j.match >= 70).length;
   document.getElementById('statOpen').textContent = activeJobs.filter(j => j.status === '可投递').length;
@@ -1124,8 +1124,18 @@ async function syncStatusToGithub() {
     }
   } catch(e) {}
 
-  // 上传到 GitHub
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(statusMap, null, 2))));
+  // 上传到 GitHub (IE兼容的中文 base64 编码)
+  function utf8ToBase64(str) {
+    const bytes = [];
+    for (let i = 0; i < str.length; i++) {
+      const code = str.charCodeAt(i);
+      if (code < 0x80) bytes.push(code);
+      else if (code < 0x800) { bytes.push(0xc0 | (code >> 6), 0x80 | (code & 0x3f)); }
+      else { bytes.push(0xe0 | (code >> 12), 0x80 | ((code >> 6) & 0x3f), 0x80 | (code & 0x3f)); }
+    }
+    return btoa(String.fromCharCode.apply(null, bytes));
+  }
+  const content = utf8ToBase64(JSON.stringify(statusMap, null, 2));
   try {
     const resp = await fetch(GITHUB_API, {
       method: 'PUT',
