@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>求职工作台 — 智能岗位匹配</title>
   <style>
     :root {
@@ -617,16 +620,16 @@ async function loadResumeProfile() {
 }
 
 async function loadJobsData() {
+  // DATA_VERSION 每次更新数据时递增，强制浏览器加载新版本
+  const DATA_VERSION = '20260729v3';
   const sources = [
-    { url: 'https://gitone-1.github.io/job-dashboard-1/jobs.json', label: 'GitHub Pages(最新)' },
-    { url: './jobs.json', label: '本地数据' },
+    { url: 'https://gitone-1.github.io/job-dashboard-1/jobs.json?v=' + DATA_VERSION, label: 'GitHub Pages(最新)' },
+    { url: './jobs.json?v=' + DATA_VERSION, label: '本地数据' },
   ];
 
   for (const src of sources) {
     try {
-      // 加缓存破坏参数 + fetch cache: no-store 彻底禁用缓存
-      const fetchUrl = src.url + (src.url.includes('?') ? '&' : '?') + '_v=' + Date.now();
-      const resp = await fetch(fetchUrl, { cache: 'no-store' });
+      const resp = await fetch(src.url);
       if (resp.ok) {
         const data = await resp.json();
         if (Array.isArray(data) && data.length > 0) {
