@@ -624,9 +624,9 @@ async function loadJobsData() {
 
   for (const src of sources) {
     try {
-      // 加缓存破坏参数，避免浏览器缓存旧数据
-      const fetchUrl = src.url + (src.url.includes('?') ? '&' : '?') + '_t=' + Date.now();
-      const resp = await fetch(fetchUrl);
+      // 加缓存破坏参数 + fetch cache: no-store 彻底禁用缓存
+      const fetchUrl = src.url + (src.url.includes('?') ? '&' : '?') + '_v=' + Date.now();
+      const resp = await fetch(fetchUrl, { cache: 'no-store' });
       if (resp.ok) {
         const data = await resp.json();
         if (Array.isArray(data) && data.length > 0) {
@@ -738,8 +738,8 @@ function getFilteredJobs() {
   if (filters.tab !== 'all') {
     jobs = jobs.filter(j => j.status === filters.tab);
   } else {
-    // "有效岗位"模式：默认排除"不匹配"和"已关闭"
-    jobs = jobs.filter(j => j.status !== '不匹配' && j.status !== '已关闭');
+    // "有效岗位"模式：默认排除"不匹配"、"已关闭"和"已投递"
+    jobs = jobs.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递');
   }
   if (filters.search) {
     const q = filters.search.toLowerCase();
@@ -788,8 +788,8 @@ function renderJobs() {
   const container = document.getElementById('jobList');
   document.getElementById('resultCount').textContent = `显示 ${jobs.length} 个岗位`;
 
-  // Update stats (exclude mismatched and closed)
-  const activeJobs = JOBS.filter(j => j.status !== '不匹配' && j.status !== '已关闭');
+  // Update stats (exclude mismatched, closed and applied)
+  const activeJobs = JOBS.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递');
   document.getElementById('statTotal').textContent = activeJobs.length;
   document.getElementById('statMatch').textContent = activeJobs.filter(j => j.match >= 70).length;
   document.getElementById('statOpen').textContent = activeJobs.filter(j => j.status === '可投递').length;
