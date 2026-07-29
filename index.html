@@ -828,7 +828,7 @@ function renderJobs() {
         <button class="btn btn-primary" onclick="openDetail(${j.id})">📋 查看详情</button>
         <button class="btn btn-outline" onclick="toggleStatus(${j.id},'待投递')">⭐ 收藏</button>
         <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递')">✅ 标记已投</button>
-        <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 投递链接</button>
+        ${j.url.includes('mp.weixin.qq.com') || j.url.includes('bendibao.com') ? `<button class="btn btn-accent" onclick="openLink('${j.url}')" style="background:#07c160;color:#fff;border-color:#07c160;">📱 扫码看岗位</button>` : `<button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 投递链接</button>`}
         <button class="btn btn-outline" style="color:#e17055;border-color:#e17055;" onclick="reportBadLink(${j.id})">⚠️ 链接不符</button>
       </div>
     </div>`;
@@ -887,14 +887,14 @@ function openDetail(id) {
         <tr><td style="padding:6px 8px;color:var(--text-secondary);">投递截止</td><td style="padding:6px 8px;font-weight:700;${deadlineSoon?'color:#e17055;':''}">${j.deadline || '--'}</td></tr>
         <tr><td style="padding:6px 8px;color:var(--text-secondary);">招聘来源</td><td style="padding:6px 8px;">${j.source}</td></tr>
         <tr><td style="padding:6px 8px;color:var(--text-secondary);">当前状态</td><td style="padding:6px 8px;font-weight:700;">${j.status} ${j.note ? '('+j.note+')' : ''}</td></tr>
-        <tr><td style="padding:6px 8px;color:var(--text-secondary);">投递链接</td><td style="padding:6px 8px;"><a href="${j.url}" target="_blank" style="color:var(--accent);">${j.url}</a></td></tr>
+        <tr><td style="padding:6px 8px;color:var(--text-secondary);">投递链接</td><td style="padding:6px 8px;"><a href="${j.url}" target="_blank" style="color:var(--accent);">${j.url}</a>${j.url.includes('mp.weixin.qq.com') || j.url.includes('bendibao.com') ? '<br><span style="color:#e17055;font-size:11px;">⚠️ 岗位详情在原文二维码中，点击链接后用微信扫码查看</span>' : ''}</td></tr>
       </table>
     </div>
 
     <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
       <button class="btn btn-success" onclick="toggleStatus(${j.id},'已投递');closeModal();">✅ 标记为已投递</button>
       <button class="btn btn-warning" onclick="toggleStatus(${j.id},'待投递');closeModal();">⭐ 加入待投递</button>
-      <button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 打开投递链接</button>
+      ${j.url.includes('mp.weixin.qq.com') || j.url.includes('bendibao.com') ? `<button class="btn" onclick="openLink('${j.url}')" style="background:#07c160;color:#fff;border:none;">📱 打开原文扫码查看岗位</button>` : `<button class="btn btn-outline" onclick="openLink('${j.url}')">🔗 打开投递链接</button>`}
       <button class="btn btn-outline" style="color:#e17055;border-color:#e17055;" onclick="toggleStatus(${j.id},'已关闭');closeModal();">🚫 岗位已关闭</button>
       <button class="btn btn-danger" style="background:#f8c291;color:#c0392b;" onclick="reportBadLink(${j.id});closeModal();">⚠️ 链接与岗位不符</button>
       <button class="btn btn-danger" onclick="toggleStatus(${j.id},'不匹配');closeModal();">❌ 不匹配</button>
