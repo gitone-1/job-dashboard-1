@@ -524,10 +524,10 @@
   <main class="content">
     <!-- Stats -->
     <div class="stats-row">
-      <div class="stat-card"><div class="stat-num" id="statTotal">24</div><div class="stat-label">总岗位数</div></div>
-      <div class="stat-card"><div class="stat-num" id="statMatch" style="color:#00b894">18</div><div class="stat-label">匹配(≥70%)</div></div>
-      <div class="stat-card"><div class="stat-num" id="statOpen" style="color:#0984e3">15</div><div class="stat-label">可投递</div></div>
-      <div class="stat-card"><div class="stat-num" id="statDeadline" style="color:#e17055">3</div><div class="stat-label">即将截止</div></div>
+      <div class="stat-card"><div class="stat-num" id="statTotal">--</div><div class="stat-label">总岗位数</div></div>
+      <div class="stat-card"><div class="stat-num" id="statMatch" style="color:#00b894">--</div><div class="stat-label">匹配(≥70%)</div></div>
+      <div class="stat-card"><div class="stat-num" id="statOpen" style="color:#0984e3">--</div><div class="stat-label">可投递</div></div>
+      <div class="stat-card"><div class="stat-num" id="statDeadline" style="color:#e17055">--</div><div class="stat-label">即将截止</div></div>
     </div>
 
     <!-- Status Tabs -->
@@ -552,7 +552,7 @@
       <button class="btn btn-outline" id="btnSyncStatus" onclick="manualSyncStatus()" style="display:none;">☁️ 同步状态到云端</button>
     </div>
 
-    <div class="result-count" id="resultCount">显示 24 个岗位</div>
+    <div class="result-count" id="resultCount">数据加载中…</div>
 
     <!-- Job List -->
     <div class="job-list" id="jobList"></div>
@@ -561,8 +561,8 @@
 
 <!-- IE 浏览器提示 -->
 <div id="ieNotice" style="display:none; background:#fff3cd; color:#856404; padding:10px 16px; font-size:13px; text-align:center; border-bottom:1px solid #ffeaa7;">
-  ⚠️ 检测到您使用 IE 浏览器，部分功能可能异常。建议使用 <b>Edge</b> 或 <b>Chrome</b> 打开，或用此链接强制刷新：
-  <a href="https://gitone-1.github.io/job-dashboard-1/index.html?v=20260730" style="color:#0984e3; font-weight:700;">点此打开最新版</a>
+  ⚠️ 检测到您使用 IE 浏览器。本看板使用了现代网页语法，<b>IE 下所有按钮/滑块将无法点击</b>（页面顶部数字也会是占位符，并非真实数据）。请改用系统自带的 <b>Edge</b> 或 <b>Chrome</b> 打开本页面，即可正常使用全部功能。
+  <a href="https://gitone-1.github.io/job-dashboard-1/index.html?v=20260730d" style="color:#0984e3; font-weight:700;">点此用新版链接打开</a>
 </div>
 
 <!-- Job Detail Modal -->
