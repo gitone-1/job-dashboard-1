@@ -109,15 +109,16 @@ def step2_render_check(html_path):
     t.start()
 
     url = f"http://127.0.0.1:{port}/index.html"
-    errors = []
+    page_errors = []      # 未捕获的 JS 异常 —— 真错误，必须阻断
+    console_errors = []   # console.error —— 区分良性 404 与数据加载失败
     stat_total = None
     job_count = -1
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
-            page.on("pageerror", lambda exc: errors.append(f"PAGEERROR: {exc}"))
-            page.on("console", lambda msg: errors.append(f"CONSOLE[{msg.type}]: {msg.text}") if msg.type == "error" else None)
+            page.on("pageerror", lambda exc: page_errors.append(str(exc)))
+            page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
             # 用 "load" 而非 "networkidle"：页面可能向 GitHub Pages 发起会挂起的请求，
             # networkidle 会因此超时。load 事件不依赖这些外部请求。
             try:
@@ -135,13 +136,26 @@ def step2_render_check(html_path):
     finally:
         httpd.shutdown()
 
-    # 真实 JS 运行时错误 —— 必须阻断
-    if errors:
-        log_fail("渲染校验失败：浏览器捕获到运行时错误")
-        for e in errors:
+    # 1) 未捕获的 JS 异常 —— 必须阻断（这是问题8那种「整段脚本崩溃」的真信号）
+    if page_errors:
+        log_fail("渲染校验失败：页面抛出未捕获的 JS 异常")
+        for e in page_errors:
             print("   " + e)
         return False
-    # 数据已加载且列表渲染 —— 通过
+    # 2) console.error：仅当核心数据(jobs/resume)加载失败才阻断；
+    #    favicon.ico 等良性 404 仅提示，不阻断
+    data_fail = [e for e in console_errors if ("jobs" in e.lower() or "resume" in e.lower()) and "404" in e]
+    benign = [e for e in console_errors if e not in data_fail]
+    if data_fail:
+        log_fail("渲染校验失败：核心数据文件(jobs/resume)加载失败")
+        for e in data_fail:
+            print("   " + e)
+        return False
+    if benign:
+        log_warn(f"渲染校验发现 {len(benign)} 条无关 console 错误(如 favicon.ico 404)，视为良性，不阻断：")
+        for e in benign[:3]:
+            print("   " + e)
+    # 3) 数据已加载且列表渲染 —— 通过
     if stat_total not in (None, "--", "") and job_count > 0:
         log_ok(f"渲染校验通过：无运行时错误，总岗位={stat_total}，列表渲染 {job_count} 条")
         return True

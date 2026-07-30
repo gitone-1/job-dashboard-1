@@ -137,7 +137,7 @@ scraper:
 pipeline:
   freshness_days: 30        # 超过此天数的岗位自动标记过期
   dedup_threshold: 0.85    # 去重相似度阈值
-  min_match_score: 50       # 最低匹配分 (低于此分不收录)
+  min_match_score: 40       # 最低匹配分 (低于此分不收录；2026-07-30 扩覆盖降至40，让真实但 borderline 的岗位也进入供用户自筛)
 
 # 微信公众号搜索源（模式2：按公众号清单搜索）
 # 覆盖外企、央企/国企、互��网大厂、事业单位主流招聘号

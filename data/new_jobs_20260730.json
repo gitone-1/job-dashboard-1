@@ -1,128 +1,464 @@
 [
   {
-    "company": "苏州数智科技集团有限公司",
-    "type": "state",
-    "title": "数字化运营岗",
-    "city": "苏州",
-    "salary": "面议",
+    "company": "网易",
+    "type": "internet",
+    "title": "音乐人创作者中心产品运营",
+    "city": "杭州",
+    "salary": "",
     "deadline": "",
-    "source": "苏州国资委公告",
-    "url": "http://jsgzw.jiangsu.gov.cn/art/2026/3/11/art_92289_11740780.html",
-    "source_type": "gov",
-    "tags": ["数字化运营", "数据运营", "数据要素", "数字政府", "产品运营"],
-    "desc": "苏州数智科技集团（苏州市属一级国企，2022年成立）下属子公司招聘，围绕数字政府建设、数字资产运营、数据要素流通、数字产业投资开展业务运营与产品运营工作。岗位职责涉及数据运营、指标体系搭建、用户运营与运营数据分析。投递渠道：猎聘 / BOSS直聘 / FlashOffer，未招满岗位持续发布。",
-    "requirements": ["本科及以上", "3年以上数据/数字化运营经验", "熟悉数据要素、数字政府业务优先"],
+    "source": "网易招聘官网",
+    "url": "https://hr.163.com/job-detail.html?id=64504",
+    "source_type": "api",
+    "tags": [
+      "产品运营",
+      "用户运营",
+      "音乐社区"
+    ],
+    "desc": "网易音乐人创作者中心产品运营，负责音乐人全链路产品运营，2026-07更新。",
+    "requirements": [
+      "本科及以上",
+      "3年+产品/用户运营经验"
+    ],
     "status": "可投递",
-    "note": "苏州市属一级国企·下属子公司社招（持续招聘）",
+    "note": "网易官网详情页·杭州",
     "recruit_type": "社招",
-    "_meta": {"pub_date": "2026-03-11"}
+    "_meta": {
+      "pub_date": "2026-07-23"
+    }
   },
   {
-    "company": "无锡数据集团有限公司",
-    "type": "state",
-    "title": "业务运营岗",
-    "city": "无锡",
-    "salary": "面议",
+    "company": "网易",
+    "type": "internet",
+    "title": "增长全链路产品运营",
+    "city": "杭州",
+    "salary": "",
+    "deadline": "",
+    "source": "网易招聘官网",
+    "url": "https://hr.163.com/job-detail.html?id=75911",
+    "source_type": "api",
+    "tags": [
+      "产品运营",
+      "增长运营",
+      "用户增长"
+    ],
+    "desc": "网易增长全链路产品运营，主导增长体系搭建与迭代，2026-07更新。",
+    "requirements": [
+      "本科及以上",
+      "3年+增长/产品运营经验"
+    ],
+    "status": "可投递",
+    "note": "网易官网详情页·杭州",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07-16"
+    }
+  },
+  {
+    "company": "滴滴",
+    "type": "internet",
+    "title": "策略运营",
+    "city": "杭州",
+    "salary": "",
+    "deadline": "",
+    "source": "滴滴招聘官网",
+    "url": "https://talent.didiglobal.com/social/p/65429",
+    "source_type": "api",
+    "tags": [
+      "策略运营",
+      "数据分析",
+      "用户运营"
+    ],
+    "desc": "滴滴策略运营（杭州），负责业务策略制定与运营数据分析。",
+    "requirements": [
+      "本科及以上",
+      "策略/数据运营经验"
+    ],
+    "status": "可投递",
+    "note": "滴滴官方详情页·杭州",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07-29"
+    }
+  },
+  {
+    "company": "美团",
+    "type": "internet",
+    "title": "履约策略运营",
+    "city": "杭州",
+    "salary": "",
+    "deadline": "",
+    "source": "美团招聘官网",
+    "url": "https://zhaopin.meituan.com/web/position/detail?jobUnionId=4153779988",
+    "source_type": "api",
+    "tags": [
+      "策略运营",
+      "数据分析",
+      "履约"
+    ],
+    "desc": "美团履约策略运营（杭州），参与配送定价/调度策略与运营数据分析。",
+    "requirements": [
+      "本科及以上",
+      "策略运营经验"
+    ],
+    "status": "可投递",
+    "note": "美团官方详情页·杭州",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07-16"
+    }
+  },
+  {
+    "company": "小红书",
+    "type": "internet",
+    "title": "投放平台产品运营",
+    "city": "杭州",
+    "salary": "30-60k·16薪",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1981991527.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "产品运营",
+      "投放",
+      "增长运营"
+    ],
+    "desc": "小红书投放平台产品运营（杭州），3年以上经验，负责投放产品与增长运营。",
+    "requirements": [
+      "3年以上产品运营经验",
+      "本科及以上"
+    ],
+    "status": "可投递",
+    "note": "猎聘详情页·杭州",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-04-22"
+    }
+  },
+  {
+    "company": "小红书",
+    "type": "internet",
+    "title": "运营专员",
+    "city": "杭州",
+    "salary": "",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1954511331.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "用户运营",
+      "内容运营",
+      "运营专员"
+    ],
+    "desc": "小红书运营专员（杭州），基层执行岗，负责用户/内容运营。",
+    "requirements": [
+      "本科及以上",
+      "运营经验"
+    ],
+    "status": "可投递",
+    "note": "猎聘详情页·杭州",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07"
+    }
+  },
+  {
+    "company": "卡特彼勒",
+    "type": "foreign",
+    "title": "采购-数据分析方向",
+    "city": "苏州",
+    "salary": "1.3-1.9万·13薪",
     "deadline": "",
     "source": "前程无忧",
-    "url": "https://jobs.51job.com/wuxi-xwq/co3877064.html",
+    "url": "https://mq.51job.com/i1564/co2733862",
     "source_type": "51job",
-    "tags": ["业务运营", "数据运营", "数据分析", "政府信息化", "产品运营"],
-    "desc": "无锡数据集团（无锡市属国企，注册资本6.9亿，本部及8家子企业）招聘业务运营岗，聚焦数字产业与人工智能，负责政府信息化相关运营工作，涉及数据运营、数据分析、指标体系搭建与产品运营支持。办公地点无锡滨湖区。",
-    "requirements": ["本科及以上", "3年及以上相关经验", "熟悉数据/信息化业务"],
+    "tags": [
+      "数据分析",
+      "采购",
+      "Excel"
+    ],
+    "desc": "卡特彼勒（苏州）采购-数据分析方向，2年+本科，数据方向外企岗位。",
+    "requirements": [
+      "本科及以上",
+      "2年+经验",
+      "数据分析能力"
+    ],
     "status": "可投递",
-    "note": "无锡市属国企·滨湖区·12个在招职位",
+    "note": "前程无忧公司页·苏州·外企",
     "recruit_type": "社招",
-    "_meta": {"pub_date": "2026-06-23"}
+    "_meta": {
+      "pub_date": "2026-07"
+    }
   },
   {
-    "company": "宜兴市大数据发展有限公司",
+    "company": "中国电信股份有限公司浙江分公司",
     "type": "state",
-    "title": "数据运营/智慧城市运营岗",
-    "city": "无锡",
-    "salary": "面议",
+    "title": "产品运营（省云中台）",
+    "city": "杭州",
+    "salary": "8000元以上",
     "deadline": "",
-    "source": "无锡国企招聘",
-    "url": "http://www.wenwu8.com/zhaopin/article/103746.html",
+    "source": "中国电信招聘",
+    "url": "https://campus.51job.com/zjdx/index.html",
     "source_type": "gov",
-    "tags": ["数据运营", "智慧城市", "大数据", "数据分析", "城市运营"],
-    "desc": "宜兴市大数据发展有限公司（宜兴市政府授权的智慧城市建设运营主体，商业二类国有全资公司）2026年公开招聘，从事智慧城市运营、大数据发展与数据分析相关工作，负责城市数据资产运营与指标体系搭建。",
-    "requirements": ["本科及以上", "数据分析/运营相关经验", "熟悉智慧城市、大数据业务优先"],
+    "tags": [
+      "产品运营",
+      "云中台",
+      "政企"
+    ],
+    "desc": "中国电信浙江分公司2026社招含产品运营（省云中台）岗，工作地杭州，端口持续开放。",
+    "requirements": [
+      "本科及以上",
+      "产品运营经验"
+    ],
     "status": "可投递",
-    "note": "宜兴市国企·智慧城市建设运营主体·2026年7月招聘",
+    "note": "浙江电信社招·杭州·门户需确认具体JD",
     "recruit_type": "社招",
-    "_meta": {"pub_date": "2026-07-23"}
+    "_meta": {
+      "pub_date": "2026-07"
+    }
   },
   {
-    "company": "上海数据集团有限公司",
+    "company": "中移（苏州）软件技术有限公司",
     "type": "state",
-    "title": "数据运营岗",
-    "city": "上海",
-    "salary": "面议",
+    "title": "产品管理专员",
+    "city": "苏州",
+    "salary": "",
     "deadline": "",
     "source": "BOSS直聘",
-    "url": "https://www.zhipin.com/gongsi/job/56e0aa0fc0202c0d1XB_09-_GFM~.html",
+    "url": "https://www.zhipin.com/job_detail/cecad3bd3ceffa341nd42t29F1BV.html",
     "source_type": "boss",
-    "tags": ["数据运营", "数据要素", "企业运营", "产品运营", "数据分析"],
-    "desc": "上海数据集团（上海市属一级国企，以数据为核心业务）招聘数据运营岗，围绕数据要素市场化配置、数据交易平台运营、企业运营类工作展开，涉及数据运营、数据分析、指标体系与用户运营支持。",
-    "requirements": ["本科及以上", "数据运营相关经验", "了解数据要素/数据合规优先"],
+    "tags": [
+      "产品运营",
+      "产品管理",
+      "云计算"
+    ],
+    "desc": "中国移动苏州研发中心（云能力中心）产品管理专员，匹配产品运营方向。",
+    "requirements": [
+      "本科及以上",
+      "产品运营经验"
+    ],
     "status": "可投递",
-    "note": "上海市属一级国企·数据要素运营·2026年6月更新",
+    "note": "中移苏州·BOSS第三方发布·需官网复核",
     "recruit_type": "社招",
-    "_meta": {"pub_date": "2026-06-02"}
+    "_meta": {
+      "pub_date": "2026-07"
+    }
   },
   {
-    "company": "绍兴市城市发展集团（绍城城市服务）",
-    "type": "state",
-    "title": "城市运营/资产运营岗",
-    "city": "绍兴",
-    "salary": "面议",
-    "deadline": "2026-07-31",
-    "source": "绍兴国资委",
-    "url": "https://www.fenbi.com/page/fenxiaozhaokaodetail/26/0/467554946276352",
-    "source_type": "gov",
-    "tags": ["城市运营", "资产运营", "运营管理", "数据运营", "用户运营"],
-    "desc": "绍兴市绍城城市服务有限公司（绍兴市城市发展集团旗下国有控股）招聘项目管理人员，从事城市运营服务，涵盖综合体资产运营、写字楼运营、康养产业运营、智慧平台建设与运维等业态，涉及运营数据分析与指标体系管理。报名截止2026年7月31日。",
-    "requirements": ["本科及以上", "城市运营/资产管理相关经验", "40周岁及以下"],
-    "status": "可投递",
-    "note": "绍兴市属国企·城市大管家·报名截止2026-07-31",
-    "recruit_type": "社招",
-    "_meta": {"pub_date": "2026-07-09"}
-  },
-  {
-    "company": "浙江华良数字科技",
+    "company": "统一通信",
     "type": "internet",
-    "title": "产品运营岗",
-    "city": "杭州",
-    "salary": "面议",
+    "title": "数据运营专员",
+    "city": "苏州",
+    "salary": "",
     "deadline": "",
-    "source": "智联招聘",
-    "url": "https://www.zhaopin.com/jobdetail/CCL1508909860J40870526713.htm",
-    "source_type": "liepin",
-    "tags": ["产品运营", "数据运营", "指标体系", "SQL", "BI", "用户运营", "转化率"],
-    "desc": "浙江华良数字科技（杭州钱塘区）招聘产品运营岗，负责搭建并优化产品运营数据指标体系（留存率、转化率、活跃度、功能渗透率），通过SQL/BI工具进行日常监控，做归因分析与漏斗分析，支撑用户运营与增长运营决策。",
-    "requirements": ["本科及以上", "3-5年产品运营经验", "熟练SQL/BI工具", "具备指标体系搭建能力"],
+    "source": "BOSS直聘",
+    "url": "https://www.zhipin.com/job_detail/38395ad212fe179503x_0t68GVNU.html",
+    "source_type": "boss",
+    "tags": [
+      "数据运营",
+      "SQL",
+      "Excel"
+    ],
+    "desc": "统一通信数据运营专员（苏州），海量数据收集整理，熟练Excel/SQL处理百万级通信用户数据，基层执行岗。",
+    "requirements": [
+      "本科及以上",
+      "SQL/Excel",
+      "数据运营经验"
+    ],
     "status": "可投递",
-    "note": "杭州·钱塘区·数字科技·SQL/BI指标体系（高匹配）",
+    "note": "BOSS直聘·苏州",
     "recruit_type": "社招",
-    "_meta": {"pub_date": "2026-07-01"}
+    "_meta": {
+      "pub_date": "2026-07"
+    }
   },
   {
-    "company": "外企德科数字技术（上海）",
-    "type": "foreign",
-    "title": "数据运营岗",
-    "city": "上海",
-    "salary": "面议",
+    "company": "无锡海途国际贸易有限公司",
+    "type": "internet",
+    "title": "运营助理",
+    "city": "无锡",
+    "salary": "5-6千",
+    "deadline": "",
+    "source": "前程无忧",
+    "url": "https://jobs.51job.com/wuxi-lxq/170737487.html",
+    "source_type": "51job",
+    "tags": [
+      "电商运营",
+      "运营助理"
+    ],
+    "desc": "无锡海途国际贸易运营助理（无锡梁溪区），本科，基础电商运营执行岗。",
+    "requirements": [
+      "本科",
+      "电商运营经验"
+    ],
+    "status": "可投递",
+    "note": "51job·无锡梁溪",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07"
+    }
+  },
+  {
+    "company": "常州滨江国有控股集团",
+    "type": "state",
+    "title": "数据运营工程师",
+    "city": "常州",
+    "salary": "8千-1.2万",
+    "deadline": "",
+    "source": "前程无忧",
+    "url": "https://jobs.51job.com/changzhou/172598456.html",
+    "source_type": "51job",
+    "tags": [
+      "数据运营",
+      "SQL",
+      "ETL",
+      "数据分析"
+    ],
+    "desc": "常州滨江国有控股集团数据运营工程师（常州），07-26发布，3年/本科，SQL/数据分析/ETL，贴合技能栈。",
+    "requirements": [
+      "本科及以上",
+      "3年经验",
+      "SQL/ETL"
+    ],
+    "status": "可投递",
+    "note": "国企·51job·常州",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07-26"
+    }
+  },
+  {
+    "company": "长三角（嘉善）大数据运营有限公司",
+    "type": "state",
+    "title": "市场专员（信息化运营）",
+    "city": "嘉兴",
+    "salary": "",
+    "deadline": "",
+    "source": "粉笔/国企公告",
+    "url": "https://www.fenbi.com/page/fenxiaozhaokaodetail/26/3855/464788358711297",
+    "source_type": "gov",
+    "tags": [
+      "信息化运营",
+      "数据",
+      "市场专员"
+    ],
+    "desc": "长三角（嘉善）大数据运营有限公司市场专员（信息化运营），国有控股51%，城市数字化转型/政务数据运维，本科+3年。",
+    "requirements": [
+      "本科及以上",
+      "3年经验",
+      "信息化/数据运营"
+    ],
+    "status": "可投递",
+    "note": "嘉兴嘉善·国企·信息化运营",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07"
+    }
+  },
+  {
+    "company": "湖州犇力控股有限公司",
+    "type": "internet",
+    "title": "数据运营",
+    "city": "湖州",
+    "salary": "",
+    "deadline": "",
+    "source": "BOSS直聘",
+    "url": "https://www.zhipin.com/job_detail/6c6c565950a5912603B-2ty_ElFS.html",
+    "source_type": "boss",
+    "tags": [
+      "数据运营",
+      "数据分析"
+    ],
+    "desc": "湖州犇力控股数据运营（湖州），2026年在招数据运营岗。",
+    "requirements": [
+      "本科及以上",
+      "数据运营经验"
+    ],
+    "status": "可投递",
+    "note": "BOSS直聘·湖州",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07"
+    }
+  },
+  {
+    "company": "北京元智三目生物科技有限公司（湖州）",
+    "type": "internet",
+    "title": "数据运营",
+    "city": "湖州",
+    "salary": "",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/job/1965784311.shtml",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "生物科技"
+    ],
+    "desc": "北京元智三目生物科技（湖州）数据运营岗，猎聘在招，工作地湖州。",
+    "requirements": [
+      "本科及以上",
+      "数据运营经验"
+    ],
+    "status": "可投递",
+    "note": "猎聘·湖州·需登录查看详情",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07"
+    }
+  },
+  {
+    "company": "绍兴柯桥南兰红进出口有限公司",
+    "type": "internet",
+    "title": "数据运营分析师",
+    "city": "绍兴",
+    "salary": "",
+    "deadline": "",
+    "source": "猎聘",
+    "url": "https://www.liepin.com/city-shaoxing/zpshujuyunyingfenxishi/",
+    "source_type": "liepin",
+    "tags": [
+      "数据运营",
+      "数据分析",
+      "外贸"
+    ],
+    "desc": "绍兴柯桥南兰红进出口数据运营分析师（绍兴），外贸企业，本科可接受。",
+    "requirements": [
+      "本科及以上",
+      "数据分析经验"
+    ],
+    "status": "可投递",
+    "note": "猎聘·绍兴",
+    "recruit_type": "社招",
+    "_meta": {
+      "pub_date": "2026-07"
+    }
+  },
+  {
+    "company": "杭州微智兆智能科技有限公司（绍兴）",
+    "type": "internet",
+    "title": "数据分析师",
+    "city": "绍兴",
+    "salary": "5-6千",
     "deadline": "",
     "source": "智联招聘",
-    "url": "https://www.zhaopin.com/jobdetail/CCL1480117890J40787690105.htm",
-    "source_type": "liepin",
-    "tags": ["数据运营", "数据分析", "运营支持", "用户运营", "产品运营"],
-    "desc": "外企德科数字技术（上海杨浦区）招聘数据运营岗，负责美容行业数据整理、分析和报告编制，协助运营团队进行数据统计分析并提供决策支持，日常数据录入与维护，涉及用户运营数据分析与指标体系。",
-    "requirements": ["本科及以上", "数据分析经验", "熟悉Excel/BI工具"],
+    "url": "https://www.zhaopin.com/sou/jl658/kwCLO66RII0PJP0NG8",
+    "source_type": "51job",
+    "tags": [
+      "数据分析",
+      "用户运营",
+      "VOC"
+    ],
+    "desc": "杭州微智兆智能（绍兴越城区）数据分析师，VOC监测方向，1-3年/本科。",
+    "requirements": [
+      "本科及以上",
+      "1-3年",
+      "数据分析"
+    ],
     "status": "可投递",
-    "note": "上海·杨浦·外企·美容行业数据运营",
+    "note": "智联·绍兴越城",
     "recruit_type": "社招",
-    "_meta": {"pub_date": "2026-07-15"}
+    "_meta": {
+      "pub_date": "2026-07"
+    }
   }
 ]
