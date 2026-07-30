@@ -861,7 +861,8 @@ function renderJobs() {
         <button class="btn btn-outline" style="color:#e17055;border-color:#e17055;" onclick="reportBadLink(${j.id})">⚠️ 链接不符</button>
       </div>
     </div>`;
-  } catch (e) { console.error('卡片渲染异常 id=' + (j && j.id), e); return '<div class="job-card"><div class="job-title">⚠️ 该岗位数据异常，已跳过</div></div>'; } }).join('');
+  } catch (e) { console.error('卡片渲染异常 id=' + (j && j.id), e); return '<div class="job-card"><div class="job-title">⚠️ 该岗位数据异常，已跳过</div></div>'; }
+  }).join('');
 
   if (jobs.length === 0) {
     container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-secondary);">🔍 没有匹配的岗位，请调整筛选条件</div>';
@@ -1111,7 +1112,6 @@ async function fetchStatusFromRemote() {
   }
   
   return null;
-}
 }
 
 function applyStatusMap(statusMap, source) {
