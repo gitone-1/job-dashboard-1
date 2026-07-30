@@ -132,4 +132,20 @@
 
 ---
 
+---
+
+## 五、用户永久需求 / 排除项
+
+> 记录用户长期有效的偏好，更新岗位时必须遵守。
+
+### 永久排除：上海
+- **生效日期**：2026-07-30
+- **用户原话**：「未来再让你帮我更新岗位，都不要给我看上海的了，把上海从需求里面去除」
+- **已落地改动**：
+  1. `config.yaml` → `cities` 列表移除「上海」（流水线预过滤的权威依据）
+  2. `resume_profile.json` → `targetCities` 移除「上海」
+  3. `pipeline/wechat_sources.py` → `USER_PROFILE.target_cities` 与 `CORE_SOURCES` 国资小新 `target_cities` 均移除「上海」
+- **既有数据**：现有 6 个上海岗位已全部标记为「不匹配」（经 `exclude_shanghai.py`），并从"有效岗位"隐藏；其状态已同步云端，`restore_user_status` 会在每次更新后重新应用，不会回弹。
+- **未来更新自动生效**：`update_manual.py` 的预过滤 `should_include(job, config)` 会因 `city='上海' ∉ cities` 直接丢弃任何上海岗位，无需每次手动处理。
+
 *本文档每次遇到新问题后更新*
