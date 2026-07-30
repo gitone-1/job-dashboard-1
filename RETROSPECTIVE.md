@@ -65,6 +65,28 @@
 
 ---
 
+### 问题7：自动爬虫（Playwright）在沙箱中 EPIPE 崩溃
+**现象**：2026-07-30 运行 `pipeline.py` 更新时，步骤 [1/5] 大厂 API 抓取阶段 node 子进程抛出 `Error: write EPIPE`，整个 Python 进程崩溃，未写入任何数据
+**根因**：
+- `api_sources.py`、`scraper_boss.py`、`scraper_guopin.py`、`scraper_wechat.py` 均依赖 Playwright 启动 Chromium；沙箱环境下 Chromium 子进程不稳定，`socket` 上的 `error` 事件未被 try/except 捕获，直接杀进程
+- `scraper_liepin.py` 虽优先用 requests，但失败后 fallback 到 Playwright，同样会崩
+
+**已修复（规避方案）**：
+- ✅ 放弃依赖 Playwright 的自动爬虫，改用 **WebSearch / WebFetch 定向采集**真实岗位
+- ✅ 新增 `update_manual.py`：读取 `data/new_jobs_YYYYMMDD.json` 种子文件，复用 `DedupEngine` / `MatchEngine` / `restore_user_status` / `update_index_data_ref`，完成去重→匹配→状态恢复→版本化写入
+- ✅ **关键修正**：只对新岗位计算匹配度，**保留现有岗位的原有（前端算法）匹配度**，避免 Python 匹配引擎与前端算法分差过大导致现有岗位被误判 <50% 而遭删除
+- ✅ 运行方式：`python3 update_manual.py`（写入）/ `--dry-run`（试运行）
+
+**后续更新 SOP**：
+1. 用 WebSearch 按目标城市+岗位定向搜新鲜岗位（优先补无锡/上海/绍兴/湖州/嘉兴等空白城市）
+2. 把核实过的岗位写入 `data/new_jobs_YYYYMMDD.json`（字段与 jobs.json 一致）
+3. `python3 update_manual.py --dry-run` 确认新增数量与匹配度
+4. `python3 update_manual.py` 正式写入并自动版本化
+5. `git add` + `git commit` + `git push` 到 GitHub Pages
+6. 给用户带 `?v=日期` 参数的链接
+
+---
+
 ## 二、根本原因分析
 
 | 维度 | 问题 |
