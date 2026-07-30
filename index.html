@@ -817,7 +817,8 @@ function renderJobs() {
 
   // Update stats (exclude mismatched, closed and applied)
   const activeJobs = JOBS.filter(j => j.status !== '不匹配' && j.status !== '已关闭' && j.status !== '已投递' && j.status !== '已截止');
-  document.getElementById('statTotal').textContent = activeJobs.length;
+  // 「总岗位数」应反映真实岗位总量，而非有效岗位数（有效岗位数见下方 statOpen / 有效岗位 tab）
+  document.getElementById('statTotal').textContent = JOBS.length;
   document.getElementById('statMatch').textContent = activeJobs.filter(j => j.match >= 70).length;
   document.getElementById('statOpen').textContent = activeJobs.filter(j => j.status === '可投递').length;
   document.getElementById('statDeadline').textContent = activeJobs.filter(j => isDeadlineSoon(j.deadline) && j.status === '可投递').length;
