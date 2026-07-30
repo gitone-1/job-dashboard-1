@@ -1,6 +1,7 @@
 """
 匹配度计算引擎 - 与前端 calcMatchScore 算法完全一致
 """
+import re
 from typing import Dict, List
 
 
@@ -59,7 +60,7 @@ class MatchEngine:
         return ' '.join(parts)
 
     def should_include(self, job: Dict, config: Dict) -> bool:
-        """判断岗位是否应该被收录"""
+        """判断岗位是否应该被收录（含用户硬性过滤规则）"""
         title_lower = job.get('title', '').lower()
 
         # 排除管理岗
@@ -74,7 +75,50 @@ class MatchEngine:
         if city and city not in target_cities:
             return False
 
+        # 用户硬性过滤规则（2026-07-30 新增，详见 RETROSPECTIVE.md 第五章）
+        #   1) 明确要求 Python（必需）的岗去掉；"Python 优先" 保留
+        #   2) 国企/事业单位 且 要求硕士 的去掉；私企要求硕士 保留
+        if self.hard_exclude(job):
+            return False
+
         return True
+
+    def is_public_sector(self, job: Dict) -> bool:
+        """是否为国企/事业单位（用户规则：此类要求硕士才去掉，私企不去掉）"""
+        t = job.get('type', '')
+        if t in ('state', 'gov', '国企'):
+            return True
+        blob = ' '.join([str(job.get('company', '')), str(job.get('source', '')),
+                         str(job.get('note', ''))]).lower()
+        for kw in ['国资', '国企', '事业单位', '事业编', '研究院', '局', '委']:
+            if kw in blob:
+                return True
+        return False
+
+    def _mentions_without_pref(self, text: str, pattern: str) -> bool:
+        """text 中是否存在 pattern 的提及，且附近没有「优先 / prefer」（即"必需"而非"优先"）"""
+        for m in re.finditer(pattern, text):
+            seg = text[max(0, m.start() - 22): m.start() + 18]
+            if '优先' not in seg and 'prefer' not in seg.lower():
+                return True
+        return False
+
+    def hard_exclude(self, job: Dict) -> str:
+        """返回硬过滤原因；None 表示不排除。
+
+        规则（用户 2026-07-30）：
+          - 明确要求 Python（必需）→ 去掉；"Python 优先" → 保留
+          - 国企/事业单位 且 要求硕士 → 去掉；私企要求硕士 → 保留
+        """
+        blob = ' '.join([
+            str(job.get('title', '')), str(job.get('desc', '')),
+            ' '.join(job.get('requirements', [])), str(job.get('note', ''))
+        ]).lower()
+        if self._mentions_without_pref(blob, r'python|pyhon'):
+            return '要求Python(必需)'
+        if self.is_public_sector(job) and self._mentions_without_pref(blob, r'硕士|研究生|master'):
+            return '国企/事业单位要求硕士'
+        return None
 
     def compute_all(self, jobs: List[Dict]) -> List[Dict]:
         """批量计算所有岗位的匹配度"""
